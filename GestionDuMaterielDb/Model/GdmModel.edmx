@@ -1,0 +1,611 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GestionDuMaterielModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CodeBarre">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RondeId" Type="int" Nullable="false" />
+          <Property Name="CodeBarre" Type="nchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employe">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateEntree" Type="datetime" />
+          <Property Name="Nom" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Prenom" Type="nchar" MaxLength="50" />
+          <Property Name="EntreeDescription" Type="nchar" MaxLength="50" />
+          <Property Name="DateSortie" Type="datetime" />
+          <Property Name="SortieDescription" Type="nchar" MaxLength="50" />
+          <Property Name="MeubleId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Materiel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeMaterielId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="CodeBarre" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Entree" Type="datetime" />
+          <Property Name="Sortie" Type="datetime" />
+          <Property Name="DescriptionEntree" Type="nchar" MaxLength="50" />
+          <Property Name="DescriptionSortie" Type="nchar" MaxLength="50" />
+          <Property Name="Achat" Type="datetime" />
+          <Property Name="Garantie" Type="bit" />
+          <Property Name="GarantieEcheance" Type="datetime" />
+          <Property Name="PrixAchat" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Meuble">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodeBarre" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="PieceId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Piece">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="PlanId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Plan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="NomFichier" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="CheminDossierSource" Type="nchar" MaxLength="200" Nullable="false" />
+          <Property Name="Description" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateImport" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PresenceMateriel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RondeId" Type="int" Nullable="false" />
+          <Property Name="MaterielId" Type="int" Nullable="false" />
+          <Property Name="MeubleId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ronde">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="NomFichier" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CheminFichierSource" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeMateriel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CodeBarre_Ronde">
+          <End Role="Ronde" Type="Self.Ronde" Multiplicity="1" />
+          <End Role="CodeBarre" Type="Self.CodeBarre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ronde">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CodeBarre">
+              <PropertyRef Name="RondeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employe_Meuble">
+          <End Role="Meuble" Type="Self.Meuble" Multiplicity="1" />
+          <End Role="Employe" Type="Self.Employe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meuble">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employe">
+              <PropertyRef Name="MeubleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Materiel_TypeMateriel">
+          <End Role="TypeMateriel" Type="Self.TypeMateriel" Multiplicity="1" />
+          <End Role="Materiel" Type="Self.Materiel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeMateriel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Materiel">
+              <PropertyRef Name="TypeMaterielId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Meuble_Piece">
+          <End Role="Piece" Type="Self.Piece" Multiplicity="1" />
+          <End Role="Meuble" Type="Self.Meuble" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Piece">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Meuble">
+              <PropertyRef Name="PieceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Piece_Plan">
+          <End Role="Plan" Type="Self.Plan" Multiplicity="1" />
+          <End Role="Piece" Type="Self.Piece" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Piece">
+              <PropertyRef Name="PlanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PresenceMateriel_Materiel">
+          <End Role="Materiel" Type="Self.Materiel" Multiplicity="1" />
+          <End Role="PresenceMateriel" Type="Self.PresenceMateriel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materiel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PresenceMateriel">
+              <PropertyRef Name="MaterielId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PresenceMateriel_Meuble">
+          <End Role="Meuble" Type="Self.Meuble" Multiplicity="1" />
+          <End Role="PresenceMateriel" Type="Self.PresenceMateriel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meuble">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PresenceMateriel">
+              <PropertyRef Name="MeubleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PresenceMateriel_Ronde">
+          <End Role="Ronde" Type="Self.Ronde" Multiplicity="1" />
+          <End Role="PresenceMateriel" Type="Self.PresenceMateriel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ronde">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PresenceMateriel">
+              <PropertyRef Name="RondeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GestionDuMaterielModelStoreContainer">
+          <EntitySet Name="CodeBarre" EntityType="Self.CodeBarre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employe" EntityType="Self.Employe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Materiel" EntityType="Self.Materiel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Meuble" EntityType="Self.Meuble" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Piece" EntityType="Self.Piece" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Plan" EntityType="Self.Plan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PresenceMateriel" EntityType="Self.PresenceMateriel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ronde" EntityType="Self.Ronde" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeMateriel" EntityType="Self.TypeMateriel" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CodeBarre_Ronde" Association="Self.FK_CodeBarre_Ronde">
+            <End Role="Ronde" EntitySet="Ronde" />
+            <End Role="CodeBarre" EntitySet="CodeBarre" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employe_Meuble" Association="Self.FK_Employe_Meuble">
+            <End Role="Meuble" EntitySet="Meuble" />
+            <End Role="Employe" EntitySet="Employe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Materiel_TypeMateriel" Association="Self.FK_Materiel_TypeMateriel">
+            <End Role="TypeMateriel" EntitySet="TypeMateriel" />
+            <End Role="Materiel" EntitySet="Materiel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Meuble_Piece" Association="Self.FK_Meuble_Piece">
+            <End Role="Piece" EntitySet="Piece" />
+            <End Role="Meuble" EntitySet="Meuble" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Piece_Plan" Association="Self.FK_Piece_Plan">
+            <End Role="Plan" EntitySet="Plan" />
+            <End Role="Piece" EntitySet="Piece" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PresenceMateriel_Materiel" Association="Self.FK_PresenceMateriel_Materiel">
+            <End Role="Materiel" EntitySet="Materiel" />
+            <End Role="PresenceMateriel" EntitySet="PresenceMateriel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PresenceMateriel_Meuble" Association="Self.FK_PresenceMateriel_Meuble">
+            <End Role="Meuble" EntitySet="Meuble" />
+            <End Role="PresenceMateriel" EntitySet="PresenceMateriel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PresenceMateriel_Ronde" Association="Self.FK_PresenceMateriel_Ronde">
+            <End Role="Ronde" EntitySet="Ronde" />
+            <End Role="PresenceMateriel" EntitySet="PresenceMateriel" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GestionDuMaterielModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="GestionDuMaterielEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="CodeBarres" EntityType="GestionDuMaterielModel.CodeBarre" />
+          <EntitySet Name="Meubles" EntityType="GestionDuMaterielModel.Meuble" />
+          <EntitySet Name="Pieces" EntityType="GestionDuMaterielModel.Piece" />
+          <EntitySet Name="Plans" EntityType="GestionDuMaterielModel.Plan" />
+          <EntitySet Name="Rondes" EntityType="GestionDuMaterielModel.Ronde" />
+          <EntitySet Name="TypeMateriels" EntityType="GestionDuMaterielModel.TypeMateriel" />
+          <EntitySet Name="Employes" EntityType="GestionDuMaterielModel.Employe" />
+          <EntitySet Name="Materiels" EntityType="GestionDuMaterielModel.Materiel" />
+          <EntitySet Name="PresenceMateriels" EntityType="GestionDuMaterielModel.PresenceMateriel" />
+          <AssociationSet Name="FK_CodeBarre_Ronde1" Association="GestionDuMaterielModel.FK_CodeBarre_Ronde1">
+            <End Role="Ronde" EntitySet="Rondes" />
+            <End Role="CodeBarre" EntitySet="CodeBarres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employe_Meuble" Association="GestionDuMaterielModel.FK_Employe_Meuble">
+            <End Role="Meuble" EntitySet="Meubles" />
+            <End Role="Employe" EntitySet="Employes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Materiel_TypeMateriel" Association="GestionDuMaterielModel.FK_Materiel_TypeMateriel">
+            <End Role="TypeMateriel" EntitySet="TypeMateriels" />
+            <End Role="Materiel" EntitySet="Materiels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PresenceMateriel_Materiel" Association="GestionDuMaterielModel.FK_PresenceMateriel_Materiel">
+            <End Role="Materiel" EntitySet="Materiels" />
+            <End Role="PresenceMateriel" EntitySet="PresenceMateriels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Meuble_Piece" Association="GestionDuMaterielModel.FK_Meuble_Piece">
+            <End Role="Piece" EntitySet="Pieces" />
+            <End Role="Meuble" EntitySet="Meubles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PresenceMateriel_Meuble" Association="GestionDuMaterielModel.FK_PresenceMateriel_Meuble">
+            <End Role="Meuble" EntitySet="Meubles" />
+            <End Role="PresenceMateriel" EntitySet="PresenceMateriels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Piece_Plan" Association="GestionDuMaterielModel.FK_Piece_Plan">
+            <End Role="Plan" EntitySet="Plans" />
+            <End Role="Piece" EntitySet="Pieces" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PresenceMateriel_Ronde" Association="GestionDuMaterielModel.FK_PresenceMateriel_Ronde">
+            <End Role="Ronde" EntitySet="Rondes" />
+            <End Role="PresenceMateriel" EntitySet="PresenceMateriels" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CodeBarre">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="NoDeSerie" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="RondeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Ronde" Relationship="GestionDuMaterielModel.FK_CodeBarre_Ronde1" FromRole="CodeBarre" ToRole="Ronde" />
+        </EntityType>
+        <EntityType Name="Meuble">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="CodeBarre" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="PieceId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employes" Relationship="GestionDuMaterielModel.FK_Employe_Meuble" FromRole="Meuble" ToRole="Employe" />
+          <NavigationProperty Name="Piece" Relationship="GestionDuMaterielModel.FK_Meuble_Piece" FromRole="Meuble" ToRole="Piece" />
+          <NavigationProperty Name="PresenceMateriels" Relationship="GestionDuMaterielModel.FK_PresenceMateriel_Meuble" FromRole="Meuble" ToRole="PresenceMateriel" />
+        </EntityType>
+        <EntityType Name="Piece">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="PlanId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Meubles" Relationship="GestionDuMaterielModel.FK_Meuble_Piece" FromRole="Piece" ToRole="Meuble" />
+          <NavigationProperty Name="Plan" Relationship="GestionDuMaterielModel.FK_Piece_Plan" FromRole="Piece" ToRole="Plan" />
+        </EntityType>
+        <EntityType Name="Plan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="NomFichier" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="CheminDossierSource" Type="String" Nullable="false" MaxLength="200" FixedLength="true" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="DateImport" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Pieces" Relationship="GestionDuMaterielModel.FK_Piece_Plan" FromRole="Plan" ToRole="Piece" />
+        </EntityType>
+        <EntityType Name="Ronde">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NomFichier" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CheminFichierSource" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CodeBarres" Relationship="GestionDuMaterielModel.FK_CodeBarre_Ronde1" FromRole="Ronde" ToRole="CodeBarre" />
+          <NavigationProperty Name="PresenceMateriels" Relationship="GestionDuMaterielModel.FK_PresenceMateriel_Ronde" FromRole="Ronde" ToRole="PresenceMateriel" />
+        </EntityType>
+        <EntityType Name="TypeMateriel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Materiels" Relationship="GestionDuMaterielModel.FK_Materiel_TypeMateriel" FromRole="TypeMateriel" ToRole="Materiel" />
+        </EntityType>
+        <EntityType Name="Employe">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateEntree" Type="DateTime" Precision="3" />
+          <Property Name="Nom" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Prenom" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="EntreeDescription" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="DateSortie" Type="DateTime" Precision="3" />
+          <Property Name="SortieDescription" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="MeubleId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Meuble" Relationship="GestionDuMaterielModel.FK_Employe_Meuble" FromRole="Employe" ToRole="Meuble" />
+        </EntityType>
+        <EntityType Name="Materiel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeMaterielId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="CodeBarre" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Entree" Type="DateTime" Precision="3" />
+          <Property Name="Sortie" Type="DateTime" Precision="3" />
+          <Property Name="DescriptionEntree" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="DescriptionSortie" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Achat" Type="DateTime" Precision="3" />
+          <Property Name="Garantie" Type="Boolean" />
+          <Property Name="GarantieEcheance" Type="DateTime" Precision="3" />
+          <Property Name="PrixAchat" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="TypeMateriel" Relationship="GestionDuMaterielModel.FK_Materiel_TypeMateriel" FromRole="Materiel" ToRole="TypeMateriel" />
+          <NavigationProperty Name="PresenceMateriels" Relationship="GestionDuMaterielModel.FK_PresenceMateriel_Materiel" FromRole="Materiel" ToRole="PresenceMateriel" />
+        </EntityType>
+        <EntityType Name="PresenceMateriel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RondeId" Type="Int32" Nullable="false" />
+          <Property Name="MaterielId" Type="Int32" Nullable="false" />
+          <Property Name="MeubleId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Materiel" Relationship="GestionDuMaterielModel.FK_PresenceMateriel_Materiel" FromRole="PresenceMateriel" ToRole="Materiel" />
+          <NavigationProperty Name="Meuble" Relationship="GestionDuMaterielModel.FK_PresenceMateriel_Meuble" FromRole="PresenceMateriel" ToRole="Meuble" />
+          <NavigationProperty Name="Ronde" Relationship="GestionDuMaterielModel.FK_PresenceMateriel_Ronde" FromRole="PresenceMateriel" ToRole="Ronde" />
+        </EntityType>
+        <Association Name="FK_CodeBarre_Ronde1">
+          <End Type="GestionDuMaterielModel.Ronde" Role="Ronde" Multiplicity="1" />
+          <End Type="GestionDuMaterielModel.CodeBarre" Role="CodeBarre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ronde">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CodeBarre">
+              <PropertyRef Name="RondeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employe_Meuble">
+          <End Type="GestionDuMaterielModel.Meuble" Role="Meuble" Multiplicity="1" />
+          <End Type="GestionDuMaterielModel.Employe" Role="Employe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meuble">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employe">
+              <PropertyRef Name="MeubleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Materiel_TypeMateriel">
+          <End Type="GestionDuMaterielModel.TypeMateriel" Role="TypeMateriel" Multiplicity="1" />
+          <End Type="GestionDuMaterielModel.Materiel" Role="Materiel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeMateriel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Materiel">
+              <PropertyRef Name="TypeMaterielId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PresenceMateriel_Materiel">
+          <End Type="GestionDuMaterielModel.Materiel" Role="Materiel" Multiplicity="1" />
+          <End Type="GestionDuMaterielModel.PresenceMateriel" Role="PresenceMateriel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materiel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PresenceMateriel">
+              <PropertyRef Name="MaterielId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Meuble_Piece">
+          <End Type="GestionDuMaterielModel.Piece" Role="Piece" Multiplicity="1" />
+          <End Type="GestionDuMaterielModel.Meuble" Role="Meuble" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Piece">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Meuble">
+              <PropertyRef Name="PieceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PresenceMateriel_Meuble">
+          <End Type="GestionDuMaterielModel.Meuble" Role="Meuble" Multiplicity="1" />
+          <End Type="GestionDuMaterielModel.PresenceMateriel" Role="PresenceMateriel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meuble">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PresenceMateriel">
+              <PropertyRef Name="MeubleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Piece_Plan">
+          <End Type="GestionDuMaterielModel.Plan" Role="Plan" Multiplicity="1" />
+          <End Type="GestionDuMaterielModel.Piece" Role="Piece" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Piece">
+              <PropertyRef Name="PlanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PresenceMateriel_Ronde">
+          <End Type="GestionDuMaterielModel.Ronde" Role="Ronde" Multiplicity="1" />
+          <End Type="GestionDuMaterielModel.PresenceMateriel" Role="PresenceMateriel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ronde">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PresenceMateriel">
+              <PropertyRef Name="RondeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GestionDuMaterielModelStoreContainer" CdmEntityContainer="GestionDuMaterielEntities" >
+          <EntitySetMapping Name="CodeBarres">
+            <EntityTypeMapping TypeName="GestionDuMaterielModel.CodeBarre">
+              <MappingFragment StoreEntitySet="CodeBarre">
+                <ScalarProperty Name="NoDeSerie" ColumnName="CodeBarre" />
+                <ScalarProperty Name="RondeId" ColumnName="RondeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Meubles">
+            <EntityTypeMapping TypeName="GestionDuMaterielModel.Meuble">
+              <MappingFragment StoreEntitySet="Meuble">
+                <ScalarProperty Name="PieceId" ColumnName="PieceId" />
+                <ScalarProperty Name="CodeBarre" ColumnName="CodeBarre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pieces">
+            <EntityTypeMapping TypeName="GestionDuMaterielModel.Piece">
+              <MappingFragment StoreEntitySet="Piece">
+                <ScalarProperty Name="PlanId" ColumnName="PlanId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Plans">
+            <EntityTypeMapping TypeName="GestionDuMaterielModel.Plan">
+              <MappingFragment StoreEntitySet="Plan">
+                <ScalarProperty Name="DateImport" ColumnName="DateImport" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CheminDossierSource" ColumnName="CheminDossierSource" />
+                <ScalarProperty Name="NomFichier" ColumnName="NomFichier" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rondes">
+            <EntityTypeMapping TypeName="GestionDuMaterielModel.Ronde">
+              <MappingFragment StoreEntitySet="Ronde">
+                <ScalarProperty Name="CheminFichierSource" ColumnName="CheminFichierSource" />
+                <ScalarProperty Name="NomFichier" ColumnName="NomFichier" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeMateriels">
+            <EntityTypeMapping TypeName="GestionDuMaterielModel.TypeMateriel">
+              <MappingFragment StoreEntitySet="TypeMateriel">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employes">
+            <EntityTypeMapping TypeName="GestionDuMaterielModel.Employe">
+              <MappingFragment StoreEntitySet="Employe">
+                <ScalarProperty Name="MeubleId" ColumnName="MeubleId" />
+                <ScalarProperty Name="SortieDescription" ColumnName="SortieDescription" />
+                <ScalarProperty Name="DateSortie" ColumnName="DateSortie" />
+                <ScalarProperty Name="EntreeDescription" ColumnName="EntreeDescription" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="DateEntree" ColumnName="DateEntree" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Materiels">
+            <EntityTypeMapping TypeName="GestionDuMaterielModel.Materiel">
+              <MappingFragment StoreEntitySet="Materiel">
+                <ScalarProperty Name="PrixAchat" ColumnName="PrixAchat" />
+                <ScalarProperty Name="GarantieEcheance" ColumnName="GarantieEcheance" />
+                <ScalarProperty Name="Garantie" ColumnName="Garantie" />
+                <ScalarProperty Name="Achat" ColumnName="Achat" />
+                <ScalarProperty Name="DescriptionSortie" ColumnName="DescriptionSortie" />
+                <ScalarProperty Name="DescriptionEntree" ColumnName="DescriptionEntree" />
+                <ScalarProperty Name="Sortie" ColumnName="Sortie" />
+                <ScalarProperty Name="Entree" ColumnName="Entree" />
+                <ScalarProperty Name="CodeBarre" ColumnName="CodeBarre" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="TypeMaterielId" ColumnName="TypeMaterielId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PresenceMateriels">
+            <EntityTypeMapping TypeName="GestionDuMaterielModel.PresenceMateriel">
+              <MappingFragment StoreEntitySet="PresenceMateriel">
+                <ScalarProperty Name="MeubleId" ColumnName="MeubleId" />
+                <ScalarProperty Name="MaterielId" ColumnName="MaterielId" />
+                <ScalarProperty Name="RondeId" ColumnName="RondeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,19 @@
+﻿<Window x:Class="GestionDuMateriel.View.AfficheRondes"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GestionDuMateriel.View"
+        mc:Ignorable="d"
+        Title="Rondes" Height="300" Width="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <DataGrid Grid.Column="0" Grid.Row="0" Name="dagTypeMateriel" Margin="4" ItemsSource="{Binding Rondes}" SelectedItem="{Binding Ronde}" AutoGenerateColumns="True" IsReadOnly="True" />
+        <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Orientation="Horizontal" Margin="4" >
+            <Button Name="btnImporterScans" Margin="4" Content="Importer le fichier de codes-barres" />
+        </StackPanel>
+    </Grid>
+</Window>

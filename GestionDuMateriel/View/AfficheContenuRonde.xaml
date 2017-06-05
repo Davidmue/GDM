@@ -1,0 +1,22 @@
+﻿<Window x:Class="GestionDuMateriel.View.ContenuRonde"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GestionDuMateriel.View"
+        mc:Ignorable="d"
+        Title="Contenu de la ronde" Height="300" Width="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <Label Content="Ronde du 4.5.2016 : " />
+        </StackPanel>
+        <TextBlock Grid.Row="1" Name="tbScan" Text="9782212142068&#13;9782212129953" Margin="4" />
+    </Grid>
+</Window>

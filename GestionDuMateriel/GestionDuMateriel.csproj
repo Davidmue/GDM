@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4E78E908-84B9-4B89-AA96-570ABE7AC292}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>GestionDuMateriel</RootNamespace>
+    <AssemblyName>GestionDuMateriel</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="ViewModel\TypesMaterielVM.cs" />
+    <Compile Include="View\AfficheEmployes.xaml.cs">
+      <DependentUpon>AfficheEmployes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AfficheMateriel.xaml.cs">
+      <DependentUpon>AfficheMateriel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AfficheMeubles.xaml.cs">
+      <DependentUpon>AfficheMeubles.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AffichePieces.xaml.cs">
+      <DependentUpon>AffichePieces.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AffichePlans.xaml.cs">
+      <DependentUpon>AffichePlans.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AfficheRondes.xaml.cs">
+      <DependentUpon>AfficheRondes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AfficheTypesMateriel.xaml.cs">
+      <DependentUpon>AfficheTypesMateriel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Aide.xaml.cs">
+      <DependentUpon>Aide.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Apropos.xaml.cs">
+      <DependentUpon>Apropos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EmployeDetail.xaml.cs">
+      <DependentUpon>EmployeDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EmployeEntree.xaml.cs">
+      <DependentUpon>EmployeEntree.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EmployeSortie.xaml.cs">
+      <DependentUpon>EmployeSortie.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ImportePlan.xaml.cs">
+      <DependentUpon>ImportePlan.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MaterielEntree.xaml.cs">
+      <DependentUpon>MaterielEntree.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MaterielControlePresence.xaml.cs">
+      <DependentUpon>MaterielControlePresence.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MaterielSortie.xaml.cs">
+      <DependentUpon>MaterielSortie.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MeubleDetail.xaml.cs">
+      <DependentUpon>MeubleDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Options.xaml.cs">
+      <DependentUpon>Options.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PieceDetail.xaml.cs">
+      <DependentUpon>PieceDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Recherche.xaml.cs">
+      <DependentUpon>Recherche.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TypeMaterielDetail.xaml.cs">
+      <DependentUpon>TypeMaterielDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AffichePlan.xaml.cs">
+      <DependentUpon>AffichePlan.xaml</DependentUpon>
+    </Compile>
+    <Page Include="View\AfficheContenuRonde.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AfficheEmployes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AfficheMateriel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AfficheMeubles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AffichePieces.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AffichePlans.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AfficheRondes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AfficheTypesMateriel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Aide.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Apropos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EmployeDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EmployeEntree.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EmployeSortie.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ImporteRonde.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ImportePlan.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="View\AfficheContenuRonde.xaml.cs">
+      <DependentUpon>AfficheContenuRonde.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ImporteRonde.xaml.cs">
+      <DependentUpon>ImporteRonde.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="View\MaterielEntree.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MaterielControlePresence.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MaterielSortie.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MeubleDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Options.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PieceDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Recherche.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TypeMaterielDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AffichePlan.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="..\GestionDuMaterielDb\App.config">
+      <Link>App.config</Link>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GestionDuMaterielDb\GestionDuMaterielDb.csproj">
+      <Project>{ff2f27ce-9e32-49a1-97bb-8783b5611a09}</Project>
+      <Name>GestionDuMaterielDb</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

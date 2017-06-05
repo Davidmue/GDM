@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6d37468c1f4c43369abdfe4ef8da85be" Name="Diagram1" ZoomLevel="63" >
+        <EntityTypeShape EntityType="GestionDuMaterielModel.CodeBarre" Width="1.5" PointX="0.875" PointY="0.875" />
+        <EntityTypeShape EntityType="GestionDuMaterielModel.Meuble" Width="1.5" PointX="4" PointY="3.375" />
+        <EntityTypeShape EntityType="GestionDuMaterielModel.Piece" Width="1.5" PointX="2.25" PointY="3.875" />
+        <EntityTypeShape EntityType="GestionDuMaterielModel.Plan" Width="1.5" PointX="0.5" PointY="4" />
+        <EntityTypeShape EntityType="GestionDuMaterielModel.Ronde" Width="1.5" PointX="3.125" PointY="0.5" />
+        <EntityTypeShape EntityType="GestionDuMaterielModel.TypeMateriel" Width="1.5" PointX="10.375" PointY="4.125" />
+        <EntityTypeShape EntityType="GestionDuMaterielModel.Employe" Width="1.5" PointX="6.5" PointY="3.875" />
+        <EntityTypeShape EntityType="GestionDuMaterielModel.Materiel" Width="1.5" PointX="8.5" PointY="1.125" />
+        <EntityTypeShape EntityType="GestionDuMaterielModel.PresenceMateriel" Width="1.5" PointX="6" PointY="0.5" />
+        <AssociationConnector Association="GestionDuMaterielModel.FK_CodeBarre_Ronde1" />
+        <AssociationConnector Association="GestionDuMaterielModel.FK_Employe_Meuble" />
+        <AssociationConnector Association="GestionDuMaterielModel.FK_Materiel_TypeMateriel" />
+        <AssociationConnector Association="GestionDuMaterielModel.FK_PresenceMateriel_Materiel" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="GestionDuMaterielModel.FK_Meuble_Piece" />
+        <AssociationConnector Association="GestionDuMaterielModel.FK_PresenceMateriel_Meuble" />
+        <AssociationConnector Association="GestionDuMaterielModel.FK_Piece_Plan" />
+        <AssociationConnector Association="GestionDuMaterielModel.FK_PresenceMateriel_Ronde" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
