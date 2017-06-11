@@ -5,18 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GestionDuMateriel.View"
         mc:Ignorable="d"
-        Title="ImporterPlan" Height="300" Width="300">
-    <Grid>
+        Title="ImporterPlan" Height="300" Width="300" Activated="Window_Activated" Closing="Window_Closing">
+    <Grid Margin="4">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="4"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="4"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-
+        <Label Grid.Row="0" Grid.Column="0" Content="Fichier : " />
+        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Row="0" Grid.Column="0" Name="tbxFullpath" Text="" />
+            <Button Grid.Row="0" Grid.Column="1" Margin="4" Name="btnBrowse" Content="..." Click="btnBrowse_Click" />
+        </Grid>
+        <Label Grid.Row="3" Grid.Column="0" Content="Description : " />
+        <TextBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Name="tbxDescription" Text="" />
+        <Button Grid.Row="6" Grid.Column="1" Margin="4" Name="btnCancel" Content="Annuler" Click="btnCancel_Click" />
+        <Button Grid.Row="6" Grid.Column="2" Margin="4" Name="btnImport" Content="Importer" Click="btnImport_Click" />
     </Grid>
 </Window>

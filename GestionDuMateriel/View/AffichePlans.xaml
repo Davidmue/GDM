@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GestionDuMateriel.View"
         mc:Ignorable="d"
-        Title="Plans" Height="300" Width="300">
+        Title="Plans" Height="300" Width="300" Closed="Window_Closed">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -17,6 +17,16 @@
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
-
+        <DataGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Name="dgrPlans" ItemsSource="{Binding Plans}" SelectedItem="{Binding Selection}" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="20" />
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="150" />
+                <DataGridTextColumn Header="Chemin du dossier source" Binding="{Binding CheminDossierSource}" Width="300"/>
+                <DataGridTextColumn Header="Date de l'import" Binding="{Binding DateImport}" Width="150" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Grid.Row="2" Grid.Column="0" Name="btnAfficherLePlan" Content="Afficher le plan sélectionné" Click="btnAfficherLePlan_Click" />
+        <Button Grid.Row="2" Grid.Column="1" Name="btnAjouterUnPlan" Content="Ajouter un plan" Click="btnAjouterUnPlan_Click" />
+        <Button Grid.Row="2" Grid.Column="2" Name="btnSupprimerLePlan" Content="Supprimer le plan sélectionné" Command="{Binding Delete}" />
     </Grid>
 </Window>

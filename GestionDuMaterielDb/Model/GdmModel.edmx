@@ -63,11 +63,12 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NomFichier" Type="nchar" MaxLength="50" Nullable="false" />
           <Property Name="CheminDossierSource" Type="nchar" MaxLength="200" Nullable="false" />
           <Property Name="Description" Type="nchar" MaxLength="50" Nullable="false" />
           <Property Name="DateImport" Type="datetime" Nullable="false" />
+          <Property Name="RatioAffichage" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="PresenceMateriel">
           <Key>
@@ -320,6 +321,7 @@
           <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="DateImport" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Pieces" Relationship="GestionDuMaterielModel.FK_Piece_Plan" FromRole="Plan" ToRole="Piece" />
+          <Property Name="RatioAffichage" Type="Double" Nullable="false" />
         </EntityType>
         <EntityType Name="Ronde">
           <Key>
@@ -517,6 +519,7 @@
           <EntitySetMapping Name="Plans">
             <EntityTypeMapping TypeName="GestionDuMaterielModel.Plan">
               <MappingFragment StoreEntitySet="Plan">
+                <ScalarProperty Name="RatioAffichage" ColumnName="RatioAffichage" />
                 <ScalarProperty Name="DateImport" ColumnName="DateImport" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="CheminDossierSource" ColumnName="CheminDossierSource" />
