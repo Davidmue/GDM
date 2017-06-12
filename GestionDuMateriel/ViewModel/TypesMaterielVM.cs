@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GestionDuMaterielDb.Model;
+using GestionDuMateriel.Helpers;
 using System.Collections.ObjectModel;
 
 namespace GestionDuMateriel.ViewModel
 {
-    public class TypesMaterielVM
+    public class TypesMaterielVM : BaseViewModel
     {
         private ObservableCollection<TypeMateriel> _typesMateriel;
         private GestionDuMaterielEntities _entities;

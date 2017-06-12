@@ -50,10 +50,6 @@ namespace GestionDuMateriel.View
         public string DescriptionImagePlan
         {
             get { return (DataContext as AffichePlanVM).DescriptionImagePlan; }
-            set
-            {
-                (DataContext as AffichePlanVM).DescriptionImagePlan = value;
-            }
         }
 
         public AffichePlans FormulaireParent
@@ -74,7 +70,7 @@ namespace GestionDuMateriel.View
             if(! ratioIsInitialized) setRatio();
             if(ratio < 10) ratio += 0.1;
             RefreshImage();
-
+            (DataContext as AffichePlanVM).RatioAffichage = ratio;
         }
 
         private void btnZoomOut_Click(object sender, RoutedEventArgs e)
@@ -82,6 +78,7 @@ namespace GestionDuMateriel.View
             if (!ratioIsInitialized) setRatio();
             if (ratio > 0.15) ratio -= 0.1;
             RefreshImage();
+            (DataContext as AffichePlanVM).RatioAffichage = ratio;
         }
 
         private void Window_Activated(object sender, EventArgs e)
@@ -109,7 +106,7 @@ namespace GestionDuMateriel.View
 
         private void setRatio()
         {
-            ratio = 1.0;
+            ratio = (DataContext as AffichePlanVM).RatioAffichage;
             // catch original size ...
             this.FichierImagePlan.Width = this.FichierImagePlanInvisible.Width;
             this.FichierImagePlan.Height = this.FichierImagePlanInvisible.Height;

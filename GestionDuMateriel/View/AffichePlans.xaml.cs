@@ -89,7 +89,6 @@ namespace GestionDuMateriel.View
                 {
                     AffichePlan affichageDuPlan = new AffichePlan();
                     affichageDuPlan.CheminCompletImagePlan = path;
-                    affichageDuPlan.DescriptionImagePlan = (DataContext as PlansVM).Selection.Description;
                     affichageDuPlan.FormulaireParent = this; 
                     affichageDuPlan.Show();
                     _plansAffiches.Add(affichageDuPlan); 

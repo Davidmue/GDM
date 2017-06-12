@@ -87,6 +87,7 @@
     <Compile Include="Model\Plan.cs">
       <DependentUpon>GdmModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Plan_Enrichi.cs" />
     <Compile Include="Model\PresenceMateriel.cs">
       <DependentUpon>GdmModel.tt</DependentUpon>
     </Compile>

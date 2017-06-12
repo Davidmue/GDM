@@ -82,8 +82,7 @@ namespace GestionDuMateriel.ViewModel
             bool checkDoublon = false;
             foreach (Plan p in Plans)
             {
-                string pFullpath = System.IO.Path.Combine(p.CheminDossierSource.Trim(), p.NomFichier.Trim());
-                if (string.Compare(pFullpath, CheminComplet, true) == 0) checkDoublon = true;
+                if (string.Compare(p.CheminCompletDuFichier, CheminComplet, true) == 0) checkDoublon = true;
             }
             if(checkDoublon)
             {
