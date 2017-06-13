@@ -21,7 +21,8 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="20" />
                 <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="150" />
-                <DataGridTextColumn Header="Chemin du dossier source" Binding="{Binding CheminDossierSource}" Width="300"/>
+                <DataGridTextColumn Header="Ratio de l'affichage" Binding="{Binding RatioAffichage}" Width="50" />
+                <DataGridTextColumn Header="Chemin du dossier source" Binding="{Binding CheminDossierSource}" Width="300" />
                 <DataGridTextColumn Header="Date de l'import" Binding="{Binding DateImport}" Width="150" />
             </DataGrid.Columns>
         </DataGrid>

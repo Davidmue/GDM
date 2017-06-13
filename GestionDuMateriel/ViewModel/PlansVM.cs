@@ -70,6 +70,7 @@ namespace GestionDuMateriel.ViewModel
             }
         }
 
+
         public void AjoutPlan(string Description, string CheminComplet)
         {
             Plan nouveauPlan = new Plan();
@@ -95,8 +96,11 @@ namespace GestionDuMateriel.ViewModel
                 App.Entities().Plans.Add(nouveauPlan); 
                 App.Entities().SaveChanges();
                 // applique la suppression aux objets représentant les données ... 
-                this.Plans.Add(nouveauPlan);
-                this.FirePropertyChanged("Plans");
+                Plans.Add(nouveauPlan);
+                FirePropertyChanged("Plans");
+                // met à jour la sélection 
+                _selection = nouveauPlan;
+                FirePropertyChanged("Selection");
             }
             
         }

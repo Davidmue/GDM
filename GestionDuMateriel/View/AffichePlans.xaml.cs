@@ -69,10 +69,7 @@ namespace GestionDuMateriel.View
             bool found = false; 
             PlansVM vm = (DataContext as PlansVM);
             if(!(vm.Selection == null)) {
-                string path = System.IO.Path.Combine(
-                        (DataContext as PlansVM).Selection.CheminDossierSource.ToString(),
-                        (DataContext as PlansVM).Selection.NomFichier.ToString()
-                    );
+                string path = (DataContext as PlansVM).Selection.CheminCompletDuFichier; 
                 foreach (AffichePlan planDejaAffiche in _plansAffiches)
                 {
                     if(planDejaAffiche.CheminCompletImagePlan == path)
@@ -87,8 +84,8 @@ namespace GestionDuMateriel.View
                 }
                 if(!found)
                 {
-                    AffichePlan affichageDuPlan = new AffichePlan();
-                    affichageDuPlan.CheminCompletImagePlan = path;
+                    AffichePlanVM selectionDC = new AffichePlanVM((DataContext as PlansVM).Selection);
+                    AffichePlan affichageDuPlan = new AffichePlan(selectionDC);
                     affichageDuPlan.FormulaireParent = this; 
                     affichageDuPlan.Show();
                     _plansAffiches.Add(affichageDuPlan); 

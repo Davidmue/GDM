@@ -12,50 +12,55 @@ namespace GestionDuMateriel.ViewModel
 {
     public class AffichePlanVM : BaseViewModel
     {
+        // event Changed;
 
-        private string _cheminCompletImagePlan;
-        private ObservableCollection<Plan> _plans;
         private Plan _selection = null;
 
-        public AffichePlanVM()
+        // get the reference ... 
+        public AffichePlanVM(Plan Selection)
         {
-            _plans = new ObservableCollection<Plan>(App.Entities().Plans);
+            _selection = Selection; 
         }
 
         public string CheminCompletImagePlan
         {
-            get { return _cheminCompletImagePlan; }
-            set { _cheminCompletImagePlan = value;
-                foreach (Plan p in _plans)
-                {
-                    if(string.Compare(_cheminCompletImagePlan, p.CheminCompletDuFichier, true) == 0)
-                    {
-                        _selection = p;
-                        FirePropertyChanged("CheminCompletImagePlan");
-                        FirePropertyChanged("DescriptionImagePlan");
-                        FirePropertyChanged("RatioAffichage");
-                    }
-                }
-            }
+            get { return _selection.CheminCompletDuFichier; }
         }
 
         public string DescriptionImagePlan
         {
-            get { return _selection == null ? "Autre plan (pas dans la base de données)" : _selection.Description; }
+            get { return _selection.Description; }
+        }
+
+        public double Id
+        {
+            get { return _selection.Id; }
+        }
+
+        public string DateImportFormatee
+        {
+            get { return _selection.DateImport.ToString(); }
+        }
+
+        public string RatioDeuxVirgules
+        {
+            get
+            {
+                return (Math.Round(_selection.RatioAffichage, 2)).ToString();
+            }
         }
 
         public double RatioAffichage
         {
             get
             {
-                return _selection == null ? 1.0 : _selection.RatioAffichage;
+                return _selection.RatioAffichage;
             }
             set
             {
-                if(!(_selection == null))
-                {
-                    _selection.RatioAffichage = value; 
-                }
+                _selection.RatioAffichage = value;
+                FirePropertyChanged("RatioAffichage");
+                FirePropertyChanged("RatioDeuxVirgules");
             }
         }
 

@@ -32,19 +32,15 @@ namespace GestionDuMateriel.View
 
 #region interface
 
-        public AffichePlan()
+        public AffichePlan(AffichePlanVM DataContextRef)
         {
             InitializeComponent();
-            DataContext = new AffichePlanVM();
+            DataContext = DataContextRef;
         }
 
         public string CheminCompletImagePlan
         {
             get { return (DataContext as AffichePlanVM).CheminCompletImagePlan; }
-            set
-            {
-                (DataContext as AffichePlanVM).CheminCompletImagePlan = value;
-            }
         }
 
         public string DescriptionImagePlan
@@ -92,6 +88,7 @@ namespace GestionDuMateriel.View
                 else
                 {
                     setRatio();
+                    RefreshImage(); 
                 }
                 firstActivationDone = true; 
             }
