@@ -14,12 +14,13 @@ namespace GestionDuMateriel.ViewModel
     {
         // event Changed;
 
-        private Plan _selection = null;
+        private Plan _selection = null; 
 
         // get the reference ... 
         public AffichePlanVM(Plan Selection)
         {
-            _selection = Selection; 
+            _selection = Selection;
+            FirePropertyChanged("Selection");
         }
 
         public string CheminCompletImagePlan

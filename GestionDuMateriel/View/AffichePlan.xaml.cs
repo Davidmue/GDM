@@ -67,6 +67,7 @@ namespace GestionDuMateriel.View
             if(ratio < 10) ratio += 0.1;
             RefreshImage();
             (DataContext as AffichePlanVM).RatioAffichage = ratio;
+            _formulaireParent.RaffraichiGridView();
         }
 
         private void btnZoomOut_Click(object sender, RoutedEventArgs e)
@@ -75,6 +76,7 @@ namespace GestionDuMateriel.View
             if (ratio > 0.15) ratio -= 0.1;
             RefreshImage();
             (DataContext as AffichePlanVM).RatioAffichage = ratio;
+            _formulaireParent.RaffraichiGridView();
         }
 
         private void Window_Activated(object sender, EventArgs e)

@@ -66,6 +66,7 @@
     <Compile Include="Helpers\ExecutableCommand.cs" />
     <Compile Include="Helpers\MultiValueConverter.cs" />
     <Compile Include="ViewModel\AffichePlanVM.cs" />
+    <Compile Include="ViewModel\MaterielsVM.cs" />
     <Compile Include="ViewModel\PlansVM.cs" />
     <Compile Include="ViewModel\TypesMaterielVM.cs" />
     <Compile Include="View\AfficheEmployes.xaml.cs">
@@ -110,6 +111,9 @@
     <Compile Include="Helpers\BaseViewModel.cs" />
     <Compile Include="View\ImportePlan.xaml.cs">
       <DependentUpon>ImportePlan.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MaterielDetail.xaml.cs">
+      <DependentUpon>MaterielDetail.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MaterielEntree.xaml.cs">
       <DependentUpon>MaterielEntree.xaml</DependentUpon>
@@ -217,6 +221,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\MaterielDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MaterielEntree.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

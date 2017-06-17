@@ -25,10 +25,5 @@ namespace GestionDuMateriel.View
             InitializeComponent();
             DataContext = new TypesMaterielVM(); 
         }
-
-        private void Form_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            ((TypesMaterielVM)DataContext).Save(); 
-        }
     }
 }

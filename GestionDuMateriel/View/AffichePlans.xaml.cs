@@ -44,14 +44,14 @@ namespace GestionDuMateriel.View
             _plansAffiches.Remove(formulaireEnfant); 
         }
 
-        public void FormulaireEnfantZoom(string DossierImagePlan, string NomFichierPlan, double ratio)
+        public void RaffraichiGridView()
         {
-
+            dgrPlans.Items.Refresh();
         }
 
         #endregion
 
-#region events
+        #region events
 
         private void btnAjouterUnPlan_Click(object sender, RoutedEventArgs e)
         {
@@ -99,6 +99,7 @@ namespace GestionDuMateriel.View
             _dlgImporterPlan.DialogueSeraFerme = true; 
             _dlgImporterPlan.Close(); // la boîte de dialogue est fermée en même temps que 
             //                la fenêtre pour gérer les plans. 
+            App.Entities().SaveChanges();
         }
 
         #endregion

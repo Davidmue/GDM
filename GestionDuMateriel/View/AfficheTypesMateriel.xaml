@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GestionDuMateriel.View"
         mc:Ignorable="d"
-        Title="Types Matériel" Height="300" Width="300" Closing="Form_Closing">
+        Title="Types Matériel" Height="300" Width="300">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -15,9 +15,9 @@
         <DataGrid Grid.Column="0" Grid.Row="0" Name="dagTypeMateriel" Margin="4" ItemsSource="{Binding TypesMateriel}" SelectedItem="{Binding TypeMaterielSelection}" AutoGenerateColumns="True" IsReadOnly="True" />
         <local:TypeMaterielDetail Grid.Column="0" Grid.Row="1" Margin="4" DataContext="{Binding TypeMaterielSelection}" />
         <StackPanel Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Orientation="Horizontal" Margin="4" >
-            <Button Name="btnAjouter" Margin="4" Content="Ajouter" />
-            <Button Name="btnModifier" Margin="4" Content="Modifier" />
-            <Button Name="btnSupprimer" Margin="4" Content="Supprimer" />
+            <Button Name="btnAjouter" Margin="4" Content="Ajouter" Command="{Binding NouveauTypeMateriel}" />
+            <Button Name="btnSupprimer" Margin="4" Content="Supprimer" Command="{Binding SuppressionTypeMateriel}" />
+            <Button Name="btnEnregistrer" Margin="4" Content="Enregister" Command="{Binding EnregistrerTypeMateriel}" />
         </StackPanel>
     </Grid>
 </Window>

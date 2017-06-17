@@ -1,5 +1,4 @@
-﻿using GestionDuMateriel.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,19 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace GestionDuMateriel.View
 {
     /// <summary>
-    /// Logique d'interaction pour AfficheMateriel.xaml
+    /// Logique d'interaction pour MaterielDetail.xaml
     /// </summary>
-    public partial class AfficheMateriel : Window
+    public partial class MaterielDetail : UserControl
     {
-        public AfficheMateriel()
+        public MaterielDetail()
         {
             InitializeComponent();
-            DataContext = new MaterielsVM();
         }
     }
 }
