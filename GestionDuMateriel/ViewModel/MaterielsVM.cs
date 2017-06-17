@@ -15,9 +15,14 @@ namespace GestionDuMateriel.ViewModel
 
         private ObservableCollection<Materiel> _materiels;
         private Materiel _selection;
+        private TypesMaterielVM _typesMaterielVmDependance; 
 
-        public MaterielsVM()
+        public MaterielsVM(TypesMaterielVM TypesMaterielVmDependance)
         {
+            //
+            // Materiel utilise TypeMateriel ... 
+            _typesMaterielVmDependance = TypesMaterielVmDependance;
+            //
             _materiels = new ObservableCollection<Materiel>(App.Entities().Materiels);
             // ... autres collections si nécessaire
             if (_materiels.Count == 0)
@@ -27,6 +32,14 @@ namespace GestionDuMateriel.ViewModel
             else
             {
                 _selection = _materiels[0];
+            }
+        }
+
+        public ObservableCollection<TypeMateriel> LesTypesMateriel
+        {
+            get
+            {
+                return _typesMaterielVmDependance.TypesMateriel;
             }
         }
 
@@ -55,7 +68,7 @@ namespace GestionDuMateriel.ViewModel
         }
 
         public ICommand Supprime { get { return new ExecutableCommand(Suppression); } }
-        private void Suppression()
+        public void Suppression()
         {
             if (!(_selection == null))
             {
@@ -64,34 +77,47 @@ namespace GestionDuMateriel.ViewModel
                 App.Entities().SaveChanges();
                 // applique la suppression aux objets représentant les données ... 
                 LesMateriels.Remove(LeMateriel);
+                LeMateriel = null;
+                FirePropertyChanged("LeMateriel"); 
                 FirePropertyChanged("LesMateriels");
             }
         }
 
 
         public ICommand Ajoute { get { return new ExecutableCommand(Ajout); } }
-        private void Ajout()
+        public void Ajout()
         {
             Materiel nouveauMateriel = new Materiel();
             nouveauMateriel.Achat = DateTime.Now;
-            nouveauMateriel.CodeBarre = "à remplacer";
-            nouveauMateriel.Description = "à remplacer";
+            nouveauMateriel.CodeBarre = "";
+            nouveauMateriel.Description = "";
             nouveauMateriel.DescriptionEntree = "";
             nouveauMateriel.DescriptionSortie = "";
             nouveauMateriel.Entree = DateTime.Now;
             nouveauMateriel.Garantie = false;
             nouveauMateriel.GarantieEcheance = DateTime.Now;
-            nouveauMateriel.Id = 0;
+            //
+            // nouveauMateriel.Id  // Entity gère ceci ! 
+            //
             nouveauMateriel.PrixAchat = new decimal(0.0);
             nouveauMateriel.Sortie = null;
+            //
+            // un type au minimum doit être créé ...
+            ObservableCollection<TypeMateriel> typesMateriel = _typesMaterielVmDependance.TypesMateriel;
+            if(typesMateriel.Count == 0)
+            {
+                _typesMaterielVmDependance.NouveauType(); 
+            }
+            TypeMateriel typeMateriel = _typesMaterielVmDependance.TypeMaterielSelection;
+            nouveauMateriel.TypeMateriel = typeMateriel; 
+            //
             // nouveauMateriel.TypeMaterielId = 
             App.Entities().Materiels.Add(nouveauMateriel);
             App.Entities().SaveChanges();
             // applique la suppression aux objets représentant les données ... 
             LesMateriels.Add(nouveauMateriel);
+            _selection = nouveauMateriel; // met à jour la sélection 
             FirePropertyChanged("LesMateriels");
-            // met à jour la sélection 
-            _selection = nouveauMateriel;
             FirePropertyChanged("LeMateriel");
         }
 

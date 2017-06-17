@@ -10,13 +10,30 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
-            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
-
+        <Label Content="ID : " Grid.Row="0" Grid.Column="0"/>
+        <Label Content="{Binding LEmploye.Id}" Grid.Row="0" Grid.Column="1"/>
+        <Label Content="Nom : " Grid.Row="2" Grid.Column="0" />
+        <TextBox Text="{Binding LEmploye.Nom}" Grid.Row="2" Grid.Column="1" />
+        <Label Content="Prénom : " Grid.Row="3" Grid.Column="0" />
+        <TextBox Text="{Binding LEmploye.Prenom}" Grid.Row="3" Grid.Column="1" />
+        <Label Content="Date entrée : " Grid.Row="4" Grid.Column="0"  />
+        <DatePicker SelectedDate="{Binding LEmploye.DateEntree}" Grid.Row="4" Grid.Column="1" />
+        <Label Content="Description d'entrée : " Grid.Row="5" Grid.Column="0" />
+        <TextBox Text="{Binding LEmploye.EntreeDescription}" Grid.Row="5" Grid.Column="1" />
+        <Label Content="Date de sortie : " Grid.Row="6" Grid.Column="0" />
+        <DatePicker SelectedDate="{Binding LEmploye.DateSortie}" Grid.Row="6" Grid.Column="1" />
+        <Label Content="Description sortie : " Grid.Row="7" Grid.Column="0" />
+        <TextBox Text="{Binding LEmploye.SortieDescription}" Grid.Row="7" Grid.Column="1" />
     </Grid>
 </UserControl>

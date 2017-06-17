@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GestionDuMateriel.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,15 @@ namespace GestionDuMateriel.View
         public AfficheEmployes()
         {
             InitializeComponent();
+            DataContext = new EmployesVM(); 
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            //  (le bouton Enregistrer n'est pas visible (pas cliquable) par l'utilisateur ... 
+            // appel de la commande "Enregistre" à la fermeture du formulaire ... 
+            btnEnregistreEmploye.Command.Execute(null);
+        }
+
     }
 }

@@ -14,6 +14,12 @@ namespace GestionDuMaterielDb.Model
     
     public partial class Employe
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Employe()
+        {
+            this.Meubles = new HashSet<Meuble>();
+        }
+    
         public int Id { get; set; }
         public Nullable<System.DateTime> DateEntree { get; set; }
         public string Nom { get; set; }
@@ -21,8 +27,8 @@ namespace GestionDuMaterielDb.Model
         public string EntreeDescription { get; set; }
         public Nullable<System.DateTime> DateSortie { get; set; }
         public string SortieDescription { get; set; }
-        public int MeubleId { get; set; }
     
-        public virtual Meuble Meuble { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Meuble> Meubles { get; set; }
     }
 }

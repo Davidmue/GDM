@@ -22,13 +22,13 @@ namespace GestionDuMateriel.Helpers
                 if (string.IsNullOrEmpty(result))
                 {
                     // first one
-                    if (!(string.IsNullOrEmpty(value))) result = value;
+                    if (!(string.IsNullOrEmpty(value))) result = value.Trim();
                 }
                 else
                 {
                     if (!(string.IsNullOrEmpty(value)))
                     {
-                        result += " " + value;
+                        result += " " + value.Trim();
                         result = result.Trim();
                     }
                 }

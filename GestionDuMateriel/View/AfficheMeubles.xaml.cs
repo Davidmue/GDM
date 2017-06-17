@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GestionDuMateriel.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,13 @@ namespace GestionDuMateriel.View
         public AfficheMeubles()
         {
             InitializeComponent();
+            DataContext = new MeublesVM(new PiecesVM(new PlansVM()), new EmployesVM()); 
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            btnEnregMateriel.Command.Execute(null);
+        }
+
     }
 }

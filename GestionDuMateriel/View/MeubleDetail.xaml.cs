@@ -24,5 +24,20 @@ namespace GestionDuMateriel.View
         {
             InitializeComponent();
         }
+
+        private void cbxEployeEstNull_Checked(object sender, RoutedEventArgs e)
+        {
+            if(((bool)cbxEployeEstNull.IsChecked))
+            {
+                cbxEmploye.SelectedItem = null; 
+                cbxEmploye.UpdateLayout();
+            }
+        }
+
+        private void cbxEmploye_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            cbxEployeEstNull.IsChecked = false; 
+            cbxEployeEstNull.UpdateLayout(); 
+        }
     }
 }

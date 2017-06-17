@@ -69,8 +69,8 @@ namespace GestionDuMateriel.ViewModel
                 App.Entities().TypeMateriels.Remove(_selection);
                 TypesMateriel.Remove(_selection);
                 _selection = null;
-                FirePropertyChanged("TypesMateriel");
                 FirePropertyChanged("TypeMaterielSelection");
+                FirePropertyChanged("TypesMateriel");
             }
         }
 

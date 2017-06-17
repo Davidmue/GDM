@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Automation.Peers;
+using System.Windows.Automation;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -23,7 +25,14 @@ namespace GestionDuMateriel.View
         public AfficheMateriel()
         {
             InitializeComponent();
-            DataContext = new MaterielsVM();
+            DataContext = new MaterielsVM(new TypesMaterielVM());
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            //  (le bouton Enregistrer n'est pas visible (pas cliquable) par l'utilisateur ... 
+            // appel de la commande "Enregistre" à la fermeture du formulaire ... 
+            btnEnregMateriel.Command.Execute(null);
         }
     }
 }

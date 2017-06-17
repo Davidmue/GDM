@@ -9,10 +9,73 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0">
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Label Content="Id : " />
+            <Label Content="{Binding LeMateriel.Id}" />
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <Label Content="Code barre  : " />
+            <TextBox Text="{Binding LeMateriel.CodeBarre}" />
+        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Label Content="Entrée  : " />
+            <DatePicker x:Name="dapEntree" SelectedDate="{Binding LeMateriel.Entree}" />
+        </StackPanel>
+        <StackPanel Grid.Row="3" Orientation="Horizontal">
+            <Label Content="Description entrée  : " />
+            <TextBox Text="{Binding LeMateriel.DescriptionEntree}" />
+        </StackPanel>
+        <StackPanel Grid.Row="4" Orientation="Horizontal">
+            <Label Content="Sortie  : " />
+            <DatePicker x:Name="dapSortie" SelectedDate="{Binding LeMateriel.Sortie}" />
+        </StackPanel>
+        <StackPanel Grid.Row="5" Orientation="Horizontal">
+            <Label Content="Description sortie  : " />
+            <TextBox Text="{Binding LeMateriel.DescriptionSortie}" />
+        </StackPanel>
+        <StackPanel Grid.Row="6" Orientation="Horizontal">
             <Label Content="Achat : " />
             <DatePicker x:Name="dapAchat" SelectedDate="{Binding LeMateriel.Achat}" />
-        </StackPanel>            
+        </StackPanel>
+        <StackPanel Grid.Row="7" Orientation="Horizontal">
+            <Label Content="Garantie : " />
+            <CheckBox IsChecked="{Binding LeMateriel.Garantie}" />
+        </StackPanel>
+        <StackPanel Grid.Row="8" Orientation="Horizontal">
+            <Label Content="Echéance garantie : " />
+            <DatePicker x:Name="dapEcheanceGarantie" SelectedDate="{Binding LeMateriel.GarantieEcheance}" />
+        </StackPanel>
+        <StackPanel Grid.Row="9" Orientation="Horizontal">
+            <Label Content="Prix d'achat : " />
+            <TextBox Text="{Binding LeMateriel.PrixAchat, StringFormat=0.00}" HorizontalAlignment="Right" />
+        </StackPanel>
+        <StackPanel Grid.Row="10" Orientation="Horizontal">
+            <Label Content="Type matériel : " />
+            <ComboBox x:Name="cboTypeMateriel" ItemsSource="{Binding LesTypesMateriel}" SelectedItem="{Binding LeMateriel.TypeMateriel}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Description}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+        <StackPanel Grid.Row="11" Orientation="Horizontal">
+            <Label Content="Dernier aperçu  : " />
+            <Label Content="{Binding LeMateriel.DernierApercu, StringFormat=dd.MM.yyyy}" />
+        </StackPanel>
     </Grid>
 </UserControl>

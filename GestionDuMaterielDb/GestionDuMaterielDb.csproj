@@ -60,6 +60,7 @@
     <Compile Include="Model\Employe.cs">
       <DependentUpon>GdmModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Employe_Enrichi.cs" />
     <Compile Include="Model\GdmModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -78,9 +79,11 @@
     <Compile Include="Model\Materiel.cs">
       <DependentUpon>GdmModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Materiel_Enrichi.cs" />
     <Compile Include="Model\Meuble.cs">
       <DependentUpon>GdmModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Meuble_Enrichi.cs" />
     <Compile Include="Model\Piece.cs">
       <DependentUpon>GdmModel.tt</DependentUpon>
     </Compile>

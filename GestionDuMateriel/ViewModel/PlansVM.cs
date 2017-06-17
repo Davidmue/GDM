@@ -56,7 +56,7 @@ namespace GestionDuMateriel.ViewModel
         }
 
         public ICommand Delete { get { return new ExecutableCommand(DeleteExecute); } }
-        private void DeleteExecute()
+        public void DeleteExecute()
         {
             if (!(Selection == null))
             {
@@ -64,8 +64,10 @@ namespace GestionDuMateriel.ViewModel
                 App.Entities().Plans.Remove(Selection); 
                 App.Entities().SaveChanges(); 
                 // applique la suppression aux objets représentant les données ... 
-                this.Plans.Remove(Selection);
-                this.FirePropertyChanged("Plans");
+                Plans.Remove(Selection);
+                _selection = null;
+                FirePropertyChanged("Selection");
+                FirePropertyChanged("Plans");
             }
         }
 
@@ -96,9 +98,8 @@ namespace GestionDuMateriel.ViewModel
                 App.Entities().SaveChanges();
                 // applique la suppression aux objets représentant les données ... 
                 Plans.Add(nouveauPlan);
+                _selection = nouveauPlan; // met à jour la sélection 
                 FirePropertyChanged("Plans");
-                // met à jour la sélection 
-                _selection = nouveauPlan;
                 FirePropertyChanged("Selection");
             }
             

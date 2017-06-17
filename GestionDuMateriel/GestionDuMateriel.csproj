@@ -65,8 +65,12 @@
     </ApplicationDefinition>
     <Compile Include="Helpers\ExecutableCommand.cs" />
     <Compile Include="Helpers\MultiValueConverter.cs" />
+    <Compile Include="Helpers\ValueConvertor.cs" />
     <Compile Include="ViewModel\AffichePlanVM.cs" />
+    <Compile Include="ViewModel\EmployesVM.cs" />
     <Compile Include="ViewModel\MaterielsVM.cs" />
+    <Compile Include="ViewModel\MeublesVM.cs" />
+    <Compile Include="ViewModel\PiecesVM.cs" />
     <Compile Include="ViewModel\PlansVM.cs" />
     <Compile Include="ViewModel\TypesMaterielVM.cs" />
     <Compile Include="View\AfficheEmployes.xaml.cs">

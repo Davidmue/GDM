@@ -24,7 +24,6 @@
           <Property Name="EntreeDescription" Type="nchar" MaxLength="50" />
           <Property Name="DateSortie" Type="datetime" />
           <Property Name="SortieDescription" Type="nchar" MaxLength="50" />
-          <Property Name="MeubleId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Materiel">
           <Key>
@@ -48,8 +47,10 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nchar" MaxLength="50" Nullable="false" />
           <Property Name="CodeBarre" Type="nchar" MaxLength="50" Nullable="false" />
           <Property Name="PieceId" Type="int" Nullable="false" />
+          <Property Name="EmployeId" Type="int" />
         </EntityType>
         <EntityType Name="Piece">
           <Key>
@@ -107,18 +108,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Employe_Meuble">
-          <End Role="Meuble" Type="Self.Meuble" Multiplicity="1" />
-          <End Role="Employe" Type="Self.Employe" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Meuble">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Employe">
-              <PropertyRef Name="MeubleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Materiel_TypeMateriel">
           <End Role="TypeMateriel" Type="Self.TypeMateriel" Multiplicity="1" />
           <End Role="Materiel" Type="Self.Materiel" Multiplicity="*" />
@@ -128,6 +117,18 @@
             </Principal>
             <Dependent Role="Materiel">
               <PropertyRef Name="TypeMaterielId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Meuble_Employe">
+          <End Role="Employe" Type="Self.Employe" Multiplicity="0..1" />
+          <End Role="Meuble" Type="Self.Meuble" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employe">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Meuble">
+              <PropertyRef Name="EmployeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -205,13 +206,13 @@
             <End Role="Ronde" EntitySet="Ronde" />
             <End Role="CodeBarre" EntitySet="CodeBarre" />
           </AssociationSet>
-          <AssociationSet Name="FK_Employe_Meuble" Association="Self.FK_Employe_Meuble">
-            <End Role="Meuble" EntitySet="Meuble" />
-            <End Role="Employe" EntitySet="Employe" />
-          </AssociationSet>
           <AssociationSet Name="FK_Materiel_TypeMateriel" Association="Self.FK_Materiel_TypeMateriel">
             <End Role="TypeMateriel" EntitySet="TypeMateriel" />
             <End Role="Materiel" EntitySet="Materiel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Meuble_Employe" Association="Self.FK_Meuble_Employe">
+            <End Role="Employe" EntitySet="Employe" />
+            <End Role="Meuble" EntitySet="Meuble" />
           </AssociationSet>
           <AssociationSet Name="FK_Meuble_Piece" Association="Self.FK_Meuble_Piece">
             <End Role="Piece" EntitySet="Piece" />
@@ -252,10 +253,6 @@
             <End Role="Ronde" EntitySet="Rondes" />
             <End Role="CodeBarre" EntitySet="CodeBarres" />
           </AssociationSet>
-          <AssociationSet Name="FK_Employe_Meuble" Association="GestionDuMaterielModel.FK_Employe_Meuble">
-            <End Role="Meuble" EntitySet="Meubles" />
-            <End Role="Employe" EntitySet="Employes" />
-          </AssociationSet>
           <AssociationSet Name="FK_Materiel_TypeMateriel" Association="GestionDuMaterielModel.FK_Materiel_TypeMateriel">
             <End Role="TypeMateriel" EntitySet="TypeMateriels" />
             <End Role="Materiel" EntitySet="Materiels" />
@@ -280,6 +277,10 @@
             <End Role="Ronde" EntitySet="Rondes" />
             <End Role="PresenceMateriel" EntitySet="PresenceMateriels" />
           </AssociationSet>
+          <AssociationSet Name="FK_Meuble_Employe" Association="GestionDuMaterielModel.FK_Meuble_Employe">
+            <End Role="Employe" EntitySet="Employes" />
+            <End Role="Meuble" EntitySet="Meubles" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="CodeBarre">
           <Key>
@@ -297,9 +298,11 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="CodeBarre" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="PieceId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Employes" Relationship="GestionDuMaterielModel.FK_Employe_Meuble" FromRole="Meuble" ToRole="Employe" />
           <NavigationProperty Name="Piece" Relationship="GestionDuMaterielModel.FK_Meuble_Piece" FromRole="Meuble" ToRole="Piece" />
           <NavigationProperty Name="PresenceMateriels" Relationship="GestionDuMaterielModel.FK_PresenceMateriel_Meuble" FromRole="Meuble" ToRole="PresenceMateriel" />
+          <Property Name="EmployeId" Type="Int32" />
+          <NavigationProperty Name="Employe" Relationship="GestionDuMaterielModel.FK_Meuble_Employe" FromRole="Meuble" ToRole="Employe" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="Piece">
           <Key>
@@ -353,8 +356,7 @@
           <Property Name="EntreeDescription" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="DateSortie" Type="DateTime" Precision="3" />
           <Property Name="SortieDescription" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="MeubleId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Meuble" Relationship="GestionDuMaterielModel.FK_Employe_Meuble" FromRole="Employe" ToRole="Meuble" />
+          <NavigationProperty Name="Meubles" Relationship="GestionDuMaterielModel.FK_Meuble_Employe" FromRole="Employe" ToRole="Meuble" />
         </EntityType>
         <EntityType Name="Materiel">
           <Key>
@@ -396,18 +398,6 @@
             </Principal>
             <Dependent Role="CodeBarre">
               <PropertyRef Name="RondeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Employe_Meuble">
-          <End Type="GestionDuMaterielModel.Meuble" Role="Meuble" Multiplicity="1" />
-          <End Type="GestionDuMaterielModel.Employe" Role="Employe" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Meuble">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Employe">
-              <PropertyRef Name="MeubleId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -483,6 +473,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Meuble_Employe">
+          <End Type="GestionDuMaterielModel.Employe" Role="Employe" Multiplicity="0..1" />
+          <End Type="GestionDuMaterielModel.Meuble" Role="Meuble" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employe">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Meuble">
+              <PropertyRef Name="EmployeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -501,6 +503,8 @@
           <EntitySetMapping Name="Meubles">
             <EntityTypeMapping TypeName="GestionDuMaterielModel.Meuble">
               <MappingFragment StoreEntitySet="Meuble">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="EmployeId" ColumnName="EmployeId" />
                 <ScalarProperty Name="PieceId" ColumnName="PieceId" />
                 <ScalarProperty Name="CodeBarre" ColumnName="CodeBarre" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -549,7 +553,6 @@
           <EntitySetMapping Name="Employes">
             <EntityTypeMapping TypeName="GestionDuMaterielModel.Employe">
               <MappingFragment StoreEntitySet="Employe">
-                <ScalarProperty Name="MeubleId" ColumnName="MeubleId" />
                 <ScalarProperty Name="SortieDescription" ColumnName="SortieDescription" />
                 <ScalarProperty Name="DateSortie" ColumnName="DateSortie" />
                 <ScalarProperty Name="EntreeDescription" ColumnName="EntreeDescription" />

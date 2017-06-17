@@ -4,19 +4,50 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GestionDuMateriel.View"
+             xmlns:local1="clr-namespace:GestionDuMateriel.Helpers"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <local1:ValueConvertor x:Key="ValueConvertor" />
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
-            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-
+        <Label Content="ID : " Grid.Row="0" Grid.Column="0" />
+        <Label Content="{Binding LeMeuble.Id}"  Grid.Row="0" Grid.Column="1" />
+        <Label Content="Description : " Grid.Row="1" Grid.Column="0" />
+        <TextBox Text="{Binding LeMeuble.Description, Converter={StaticResource ValueConvertor}}" Grid.Row="1" Grid.Column="1" />
+        <Label Content="Code barre : " Grid.Row="2" Grid.Column="0" />
+        <TextBox Text="{Binding LeMeuble.CodeBarre, Converter={StaticResource ValueConvertor}}" Grid.Row="2" Grid.Column="1" />
+        <Label Content="Pièce : " Grid.Row="3" Grid.Column="0" />
+        <ComboBox ItemsSource="{Binding LesPieces}" Grid.Row="3" Grid.Column="1" 
+                  SelectedItem="{Binding LeMeuble.Piece}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Description, Converter={StaticResource ValueConvertor}}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Label Content="Employé(e) : " Grid.Row="4" Grid.Column="0" />
+        <ComboBox x:Name="cbxEmploye" ItemsSource="{Binding LesEmployes}" Grid.Row="4" Grid.Column="1"
+                  SelectedItem="{Binding LeMeuble.Employe}" SelectionChanged="cbxEmploye_SelectionChanged">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Description, Converter={StaticResource ValueConvertor}}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Label Content="Le mobilier est vacant : " Grid.Row="5" Grid.Column="0"/>
+        <CheckBox x:Name="cbxEployeEstNull" IsChecked="{Binding LeMeuble.EstVacant}" Grid.Row="5" Grid.Column="1" Checked="cbxEployeEstNull_Checked"/>
     </Grid>
 </UserControl>
