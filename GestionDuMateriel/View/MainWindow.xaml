@@ -5,36 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GestionDuMateriel"
         mc:Ignorable="d"
-        Title="Gestion du matériel" Height="350" Width="525">
+        Title="Gestion du matériel" Height="350" Width="525" Closing="Window_Closing">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition />
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Menu Grid.Row="0" Grid.Column="0">
-            <MenuItem Header="test">
-                <MenuItem Header="test2" />
+        <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+            <MenuItem Header="_Application">
+                <MenuItem x:Name="QuitAppMenuItem" Header="_Quitter" Click="QuitAppMenuItem_Click"  />
             </MenuItem>
-            <MenuItem Header="Édition">
-                <MenuItem Header="Rechercher" InputGestureText="Ctrl+F" />
+            <MenuItem Header="_Édition">
+                <MenuItem Header="_Rechercher" x:Name="FindMenuItem" InputGestureText="Ctrl+F" />
                 <Separator />
-                <MenuItem Header="Autre" />
+                <MenuItem Header="_Autre" />
             </MenuItem>
         </Menu>
         <Grid Grid.Row="1" Grid.Column="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition />
             </Grid.RowDefinitions>
             <StackPanel Orientation="Vertical">
-                <Button Name="btnPlans" Content="Plans" />
-                <Button Name="btnPieces" Content="Pièces" />
+                <Button Name="btnPlans" Content="Plans" Click="btnPlans_Click" />
+                <Button Name="btnPieces" Content="Pièces" Click="btnPieces_Click" />
                 <Button Name="btnMeubles" Content="Meubles" />
                 <Button Name="btnMateriel" Content="Matériel" />
                 <Button Name="btnEmployes" Content="Employés" />
@@ -44,5 +44,8 @@
                 <Button Name="btnAide" Content="Aide" />
             </StackPanel>
         </Grid>
+        <StackPanel x:Name="spaContent" Grid.Row="1" Grid.Column="1">
+            
+        </StackPanel> 
     </Grid>
 </Window>

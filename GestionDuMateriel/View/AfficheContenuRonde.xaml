@@ -15,7 +15,14 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0">
-            <Label Content="Ronde du 4.5.2016 : " />
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Ronde du " />
+                <Label Content="{Binding Date}" />
+                <Label Content=" (Id " />
+                <Label Content="{Binding Id}" />
+                <Label Content=") : " />
+            </StackPanel>
+
         </StackPanel>
         <TextBlock Grid.Row="1" Name="tbScan" Text="9782212142068&#13;9782212129953" Margin="4" />
     </Grid>

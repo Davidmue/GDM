@@ -12,6 +12,8 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RondeId" Type="int" Nullable="false" />
           <Property Name="CodeBarre" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Ignore" Type="bit" Nullable="false" />
+          <Property Name="Interpretation" Type="nchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="Employe">
           <Key>
@@ -84,10 +86,11 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
-          <Property Name="NomFichier" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CheminFichierSource" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ImportationDate" Type="datetime" />
+          <Property Name="ImportationNomFichier" Type="nvarchar" MaxLength="50" />
+          <Property Name="ImportationCheminDossierSource" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="TypeMateriel">
           <Key>
@@ -290,6 +293,8 @@
           <Property Name="NoDeSerie" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="RondeId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Ronde" Relationship="GestionDuMaterielModel.FK_CodeBarre_Ronde1" FromRole="CodeBarre" ToRole="Ronde" />
+          <Property Name="Ignore" Type="Boolean" Nullable="false" />
+          <Property Name="Interpretation" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="Meuble">
           <Key>
@@ -332,10 +337,11 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="NomFichier" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CheminFichierSource" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CodeBarres" Relationship="GestionDuMaterielModel.FK_CodeBarre_Ronde1" FromRole="Ronde" ToRole="CodeBarre" />
           <NavigationProperty Name="PresenceMateriels" Relationship="GestionDuMaterielModel.FK_PresenceMateriel_Ronde" FromRole="Ronde" ToRole="PresenceMateriel" />
+          <Property Name="ImportationDate" Type="DateTime" Precision="3" />
+          <Property Name="ImportationNomFichier" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ImportationCheminDossierSource" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="TypeMateriel">
           <Key>
@@ -494,6 +500,8 @@
           <EntitySetMapping Name="CodeBarres">
             <EntityTypeMapping TypeName="GestionDuMaterielModel.CodeBarre">
               <MappingFragment StoreEntitySet="CodeBarre">
+                <ScalarProperty Name="Interpretation" ColumnName="Interpretation" />
+                <ScalarProperty Name="Ignore" ColumnName="Ignore" />
                 <ScalarProperty Name="NoDeSerie" ColumnName="CodeBarre" />
                 <ScalarProperty Name="RondeId" ColumnName="RondeId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -535,8 +543,9 @@
           <EntitySetMapping Name="Rondes">
             <EntityTypeMapping TypeName="GestionDuMaterielModel.Ronde">
               <MappingFragment StoreEntitySet="Ronde">
-                <ScalarProperty Name="CheminFichierSource" ColumnName="CheminFichierSource" />
-                <ScalarProperty Name="NomFichier" ColumnName="NomFichier" />
+                <ScalarProperty Name="ImportationCheminDossierSource" ColumnName="ImportationCheminDossierSource" />
+                <ScalarProperty Name="ImportationNomFichier" ColumnName="ImportationNomFichier" />
+                <ScalarProperty Name="ImportationDate" ColumnName="ImportationDate" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

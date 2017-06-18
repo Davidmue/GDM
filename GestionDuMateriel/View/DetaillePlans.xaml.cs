@@ -1,5 +1,4 @@
-﻿using GestionDuMateriel.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,29 +10,29 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GestionDuMateriel.ViewModel;
 using GestionDuMateriel.View;
 using System.IO;
-
-// amélioration : pourrait enregistrer le ratio zoom ... 
+using GestionDuMateriel.Helpers;
 
 namespace GestionDuMateriel.View
 {
     /// <summary>
-    /// Logique d'interaction pour AffichePlans.xaml
+    /// Logique d'interaction pour DetaillePlans.xaml
     /// </summary>
-    public partial class AffichePlans : Window
+    public partial class DetaillePlans : UserControl
     {
-
         private List<AffichePlan> _plansAffiches;
         private ImporterPlan _dlgImporterPlan;
 
-#region interface
+        #region interface
 
-        public AffichePlans()
+        public DetaillePlans()
         {
             InitializeComponent();
-            DataContext = new PlansVM();
+            // DataContext = new PlansVM();
             _plansAffiches = new List<AffichePlan>();
             _dlgImporterPlan = new ImporterPlan(); // la fenêtre de dialogue est créée 
             //                              en même temps que la fenêtre pour gérer les plans. 
@@ -41,7 +40,7 @@ namespace GestionDuMateriel.View
 
         public void FormulaireEnfantFerme(AffichePlan formulaireEnfant)
         {
-            _plansAffiches.Remove(formulaireEnfant); 
+            _plansAffiches.Remove(formulaireEnfant);
         }
 
         public void RaffraichiGridView()
@@ -56,7 +55,7 @@ namespace GestionDuMateriel.View
         private void btnAjouterUnPlan_Click(object sender, RoutedEventArgs e)
         {
             _dlgImporterPlan.ShowDialog();
-            if(_dlgImporterPlan.InformationsValides)
+            if (_dlgImporterPlan.InformationsValides)
             {
                 (DataContext as PlansVM).AjoutPlan(_dlgImporterPlan.Description, _dlgImporterPlan.CheminComplet);
             }
@@ -66,40 +65,56 @@ namespace GestionDuMateriel.View
         private void btnAfficherLePlan_Click(object sender, RoutedEventArgs e)
         {
             // parcourt _plansAffiches à construire ...
-            bool found = false; 
+            bool found = false;
             PlansVM vm = (DataContext as PlansVM);
-            if(!(vm.Selection == null)) {
-                string path = (DataContext as PlansVM).Selection.CheminCompletDuFichier; 
+            if (!(vm.Selection == null))
+            {
+                string path = (DataContext as PlansVM).Selection.CheminCompletDuFichier;
                 foreach (AffichePlan planDejaAffiche in _plansAffiches)
                 {
-                    if(planDejaAffiche.CheminCompletImagePlan == path)
+                    if (planDejaAffiche.CheminCompletImagePlan == path)
                     {
-                        if(planDejaAffiche.WindowState == WindowState.Minimized)
+                        if (planDejaAffiche.WindowState == WindowState.Minimized)
                         {
-                            planDejaAffiche.WindowState = WindowState.Normal; 
+                            planDejaAffiche.WindowState = WindowState.Normal;
                         }
-                        planDejaAffiche.Focus(); 
-                        found = true; 
+                        planDejaAffiche.Focus();
+                        found = true;
                     }
                 }
-                if(!found)
+                if (!found)
                 {
                     AffichePlanVM selectionDC = new AffichePlanVM((DataContext as PlansVM).Selection);
                     AffichePlan affichageDuPlan = new AffichePlan(selectionDC);
-                    affichageDuPlan.FormulaireParent = this; 
+                    affichageDuPlan.FormulaireParent = this;
                     affichageDuPlan.Show();
-                    _plansAffiches.Add(affichageDuPlan); 
+                    _plansAffiches.Add(affichageDuPlan);
                 }
             }
 
         }
 
-        private void Window_Closed(object sender, EventArgs e)
+        public void ClosingParentWindow()
         {
-            _dlgImporterPlan.DialogueSeraFerme = true; 
+            // fermeture des plans ... 
+            for(int i=_plansAffiches.Count; i>0 ;i--)
+            {
+                AffichePlan planDejaAffiche = _plansAffiches[i-1];
+                if (planDejaAffiche.WindowState == WindowState.Minimized)
+                {
+                    planDejaAffiche.WindowState = WindowState.Normal;
+                }
+                planDejaAffiche.Focus();
+                planDejaAffiche.Close();
+            }
+            // fermeture de la boîte de dialogue ... 
+            _dlgImporterPlan.DialogueSeraFerme = true;
             _dlgImporterPlan.Close(); // la boîte de dialogue est fermée en même temps que 
             //                la fenêtre pour gérer les plans. 
+            //
+            // sauvegarde
             App.Entities().SaveChanges();
+
         }
 
         #endregion

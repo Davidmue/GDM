@@ -1,4 +1,5 @@
-﻿<Window x:Name="AffichagePlan" x:Class="GestionDuMateriel.View.AffichePlan"
+﻿<Window x:Class="GestionDuMateriel.View.AffichePlan"
+        x:Name="AffichagePlan"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,38 +7,38 @@
         xmlns:local="clr-namespace:GestionDuMateriel.View"
         xmlns:local1="clr-namespace:GestionDuMateriel.Helpers"
         mc:Ignorable="d"
-        Title="Plan" Height="250" Width="288" Activated="Window_Activated" Closed="Window_Closed">
-    <Window.Resources>
-        <local1:MultiValueConverter x:Key="MultiValueConverter" />
-    </Window.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left" Width="Auto" Height="Auto">
-            <TextBlock>
-                <TextBlock.Text>
-                    <MultiBinding Converter="{StaticResource MultiValueConverter}">
-                        <Binding Path="DescriptionImagePlan" />
-                        <Binding Path="Id" />
-                        <Binding Path="DateImportFormatee" />
-                    </MultiBinding>
-                </TextBlock.Text>
-            </TextBlock>
+        Title="Plan" Height="300" Width="300" Activated="Window_Activated" Closed="Window_Closed">
+        <Window.Resources>
+            <local1:MultiValueConverter x:Key="MultiValueConverter" />
+        </Window.Resources>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left" Width="Auto" Height="Auto">
+                <TextBlock>
+                    <TextBlock.Text>
+                        <MultiBinding Converter="{StaticResource MultiValueConverter}">
+                            <Binding Path="DescriptionImagePlan" />
+                            <Binding Path="Id" />
+                            <Binding Path="DateImportFormatee" />
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
 
-        </StackPanel>
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" >
-            <Label Content="Zoom ( ratio " />
-            <Label Content="{Binding RatioDeuxVirgules}" />
-            <Label Content=" )" />
-            <Button Name="btnZoomIn" Content="+" Width="20" Click="btnZoomIn_Click" />
-            <Button Name="btnZoomOut" Content="-" Width="20" Click="btnZoomOut_Click" />
-            <Image Name="FichierImagePlanInvisible" Visibility="Collapsed" Source="{Binding CheminCompletImagePlan}" Width="Auto" Height="Auto" />
-        </StackPanel>
-        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="4">
-            <Image Name="FichierImagePlan"  Source="{Binding CheminCompletImagePlan}" Width="100" Height="100" />
-        </ScrollViewer>
-    </Grid>
-</Window>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" >
+                <Label Content="Zoom ( ratio " />
+                <Label Content="{Binding RatioDeuxVirgules}" />
+                <Label Content=" )" />
+                <Button Name="btnZoomIn" Content="+" Width="20" Click="btnZoomIn_Click" />
+                <Button Name="btnZoomOut" Content="-" Width="20" Click="btnZoomOut_Click" />
+                <Image Name="FichierImagePlanInvisible" Visibility="Collapsed" Source="{Binding CheminCompletImagePlan}" Width="Auto" Height="Auto" />
+            </StackPanel>
+            <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="4">
+                <Image Name="FichierImagePlan"  Source="{Binding CheminCompletImagePlan}" Width="100" Height="100" />
+            </ScrollViewer>
+        </Grid>
+    </Window>

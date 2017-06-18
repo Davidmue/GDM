@@ -1,11 +1,11 @@
-﻿<Window x:Class="GestionDuMateriel.View.AffichePieces"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:GestionDuMateriel.View"
-        mc:Ignorable="d"
-        Title="AffichePieces" Height="300" Width="300" Closing="Window_Closing">
+﻿<UserControl x:Class="GestionDuMateriel.View.DetaillePieces"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:local="clr-namespace:GestionDuMateriel.View"
+    mc:Ignorable="d" 
+    d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -13,26 +13,28 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <local:PieceDetail x:Name="PieceDetails" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="1" />
-        <DataGrid x:Name="dgrMateriels" Grid.ColumnSpan="3" Grid.Column="0" Margin="4" Grid.Row="1" Grid.RowSpan="1" 
-                  ItemsSource="{Binding LesPieces}" SelectedItem="{Binding LaPiece}" AutoGenerateColumns="False" 
-                  IsReadOnly="True" Height="140">
+        <Label Content="Pièces" Grid.Column="0" Grid.Row="0" />
+        <local:PieceDetail x:Name="PieceDetails" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="1" />
+        <DataGrid x:Name="dgrMateriels" Grid.ColumnSpan="3" Grid.Column="0" Margin="4" Grid.Row="2" Grid.RowSpan="1" 
+    ItemsSource="{Binding LesPieces}" SelectedItem="{Binding LaPiece}" AutoGenerateColumns="False" 
+    IsReadOnly="True" Height="140">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
                 <DataGridTextColumn Header="Description" Binding="{Binding Description}" />
                 <DataGridTextColumn Header="Plan" Binding="{Binding Plan.Description}" />
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel x:Name="stpDownPan" Grid.ColumnSpan="3" Grid.Column="0" Margin="4" Grid.Row="2" Grid.RowSpan="1"
-                    Orientation="Horizontal" HorizontalAlignment="Right">
+        <StackPanel x:Name="stpDownPan" Grid.ColumnSpan="3" Grid.Column="0" Margin="4" Grid.Row="3" Grid.RowSpan="1"
+    Orientation="Horizontal" HorizontalAlignment="Right">
             <Button x:Name="btnAjoutMateriel" Command="{Binding Ajoute}" Content="Ajout d'une pièce" Margin="4" />
             <Button x:Name="btnSupprMateriel" Command="{Binding Supprime}" Content="Suppression" Margin="4" />
             <Button x:Name="btnEnregMateriel" Command="{Binding Enregistre}" Content="Enregistrement" Margin="4" Visibility="Collapsed" />
             <Label Content="       " />
         </StackPanel>
     </Grid>
-</Window>
+</UserControl>

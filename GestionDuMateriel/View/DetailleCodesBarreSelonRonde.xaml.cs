@@ -11,24 +11,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace GestionDuMateriel.View
 {
     /// <summary>
-    /// Logique d'interaction pour AffichePieces.xaml
+    /// Logique d'interaction pour DetailleCodesBarreSelonRonde.xaml
     /// </summary>
-    public partial class AffichePieces : Window
+    public partial class DetailleCodesBarreSelonRonde : UserControl
     {
-        public AffichePieces()
+        public DetailleCodesBarreSelonRonde()
         {
             InitializeComponent();
-            DataContext = new PiecesVM(new PlansVM()); 
-        }
-
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            btnEnregMateriel.Command.Execute(null);
         }
     }
 }

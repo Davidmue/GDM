@@ -20,10 +20,11 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Margin="4" Orientation="Horizontal">
             <Label Content="Id : " HorizontalAlignment="Center" HorizontalContentAlignment="Center" />
-            <Label Content="39 " HorizontalAlignment="Center" HorizontalContentAlignment="Center" />
+            <Label Content="{Binding Id}" HorizontalAlignment="Center" HorizontalContentAlignment="Center" />
             <Label Content="       " HorizontalAlignment="Center" HorizontalContentAlignment="Center" />
             <Label Content="Date : " HorizontalAlignment="Center" HorizontalContentAlignment="Center" />
-            <DatePicker Name="dtpScanDate" HorizontalAlignment="Center" HorizontalContentAlignment="Center" SelectedDate="02.02.2000" />
+            <DatePicker Name="dtpScanDate" HorizontalAlignment="Center" HorizontalContentAlignment="Center" 
+                        SelectedDate="{Binding Date}" />
         </StackPanel>
         <Label Grid.Row="2" Margin="4" Content="Chemin complet du fichier : " />
         <Grid Grid.Row="3">
@@ -34,7 +35,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <TextBox Grid.Column="0" Margin="4" Name="tbxCheminFichier" Text="C:\Temp\myScan.txt" />
+            <TextBox Grid.Column="0" Margin="4" Name="tbxCheminFichier" Text="{Binding CheminCompletFichierRonde}" />
             <Button Grid.Column="1" Margin="4" Name="btnChoisiFichier" Content="..." />
         </Grid>
         <StackPanel Grid.Row="5" Margin="4" Orientation="Horizontal" HorizontalAlignment="Right">

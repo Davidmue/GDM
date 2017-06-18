@@ -1,7 +1,5 @@
-﻿using GestionDuMateriel.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,8 +11,11 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using GestionDuMateriel.Helpers;
+using GestionDuMateriel.ViewModel;
+using System.IO;
 
-// fenêtre dépendante de la fenêtre AffichePlans ! 
+// fenêtre dépendante de la fenêtre DetaillePlans ! 
 
 namespace GestionDuMateriel.View
 {
@@ -28,9 +29,9 @@ namespace GestionDuMateriel.View
         private double ratio;
         private double originalWidth = 0;
         private double originalHeight = 0;
-        private AffichePlans _formulaireParent = null;
+        private DetaillePlans _formulaireParent = null;
 
-#region interface
+        #region interface
 
         public AffichePlan(AffichePlanVM DataContextRef)
         {
@@ -48,23 +49,23 @@ namespace GestionDuMateriel.View
             get { return (DataContext as AffichePlanVM).DescriptionImagePlan; }
         }
 
-        public AffichePlans FormulaireParent
+        public DetaillePlans FormulaireParent
         {
             get { return _formulaireParent; }
             set
             {
-                _formulaireParent = value; 
+                _formulaireParent = value;
             }
         }
 
-#endregion
+        #endregion
 
-#region events
+        #region events
 
         private void btnZoomIn_Click(object sender, RoutedEventArgs e)
         {
-            if(! ratioIsInitialized) setRatio();
-            if(ratio < 10) ratio += 0.1;
+            if (!ratioIsInitialized) setRatio();
+            if (ratio < 10) ratio += 0.1;
             RefreshImage();
             (DataContext as AffichePlanVM).RatioAffichage = ratio;
             _formulaireParent.RaffraichiGridView();
@@ -81,7 +82,7 @@ namespace GestionDuMateriel.View
 
         private void Window_Activated(object sender, EventArgs e)
         {
-            if(!firstActivationDone)
+            if (!firstActivationDone)
             {
                 if (!(File.Exists(CheminCompletImagePlan)))
                 {
@@ -90,18 +91,18 @@ namespace GestionDuMateriel.View
                 else
                 {
                     setRatio();
-                    RefreshImage(); 
+                    RefreshImage();
                 }
-                firstActivationDone = true; 
+                firstActivationDone = true;
             }
         }
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            FormulaireParent.FormulaireEnfantFerme(this); 
+            FormulaireParent.FormulaireEnfantFerme(this);
         }
 
-#endregion
+        #endregion
 
         private void setRatio()
         {
@@ -110,9 +111,9 @@ namespace GestionDuMateriel.View
             this.FichierImagePlan.Width = this.FichierImagePlanInvisible.Width;
             this.FichierImagePlan.Height = this.FichierImagePlanInvisible.Height;
             this.FichierImagePlan.UpdateLayout();
-            originalWidth = this.FichierImagePlan.RenderSize.Width; 
+            originalWidth = this.FichierImagePlan.RenderSize.Width;
             originalHeight = this.FichierImagePlan.RenderSize.Height;
-            ratioIsInitialized = true; 
+            ratioIsInitialized = true;
         }
 
         private void RefreshImage()

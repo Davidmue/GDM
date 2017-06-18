@@ -64,14 +64,17 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Helpers\ExecutableCommand.cs" />
+    <Compile Include="Helpers\IPlanParent.cs" />
     <Compile Include="Helpers\MultiValueConverter.cs" />
     <Compile Include="Helpers\ValueConvertor.cs" />
     <Compile Include="ViewModel\AffichePlanVM.cs" />
+    <Compile Include="ViewModel\CodesBarreVM.cs" />
     <Compile Include="ViewModel\EmployesVM.cs" />
     <Compile Include="ViewModel\MaterielsVM.cs" />
     <Compile Include="ViewModel\MeublesVM.cs" />
     <Compile Include="ViewModel\PiecesVM.cs" />
     <Compile Include="ViewModel\PlansVM.cs" />
+    <Compile Include="ViewModel\RondesVM.cs" />
     <Compile Include="ViewModel\TypesMaterielVM.cs" />
     <Compile Include="View\AfficheEmployes.xaml.cs">
       <DependentUpon>AfficheEmployes.xaml</DependentUpon>
@@ -82,14 +85,8 @@
     <Compile Include="View\AfficheMeubles.xaml.cs">
       <DependentUpon>AfficheMeubles.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\AffichePieces.xaml.cs">
-      <DependentUpon>AffichePieces.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\AffichePlan.xaml.cs">
       <DependentUpon>AffichePlan.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\AffichePlans.xaml.cs">
-      <DependentUpon>AffichePlans.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\AfficheRondes.xaml.cs">
       <DependentUpon>AfficheRondes.xaml</DependentUpon>
@@ -102,6 +99,15 @@
     </Compile>
     <Compile Include="View\Apropos.xaml.cs">
       <DependentUpon>Apropos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DetailleCodesBarreSelonRonde.xaml.cs">
+      <DependentUpon>DetailleCodesBarreSelonRonde.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DetaillePieces.xaml.cs">
+      <DependentUpon>DetaillePieces.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DetaillePlans.xaml.cs">
+      <DependentUpon>DetaillePlans.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\EmployeDetail.xaml.cs">
       <DependentUpon>EmployeDetail.xaml</DependentUpon>
@@ -159,15 +165,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\AffichePieces.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\AffichePlan.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\AffichePlans.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -184,6 +182,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Apropos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DetailleCodesBarreSelonRonde.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DetaillePieces.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DetaillePlans.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

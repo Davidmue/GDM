@@ -94,6 +94,7 @@
     <Compile Include="Model\PresenceMateriel.cs">
       <DependentUpon>GdmModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Ronde_Enrichi.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\Ronde.cs">

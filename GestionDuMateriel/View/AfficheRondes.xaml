@@ -4,16 +4,35 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GestionDuMateriel.View"
+        xmlns:local1="clr-namespace:GestionDuMateriel.Helpers"
         mc:Ignorable="d"
-        Title="Rondes" Height="300" Width="300">
+        Title="Rondes" Height="300" Width="300" Closing="Window_Closing">
+    <Window.Resources>
+        <local1:ValueConvertor x:Key="ValueConvertor" />
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition />
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <DataGrid Grid.Column="0" Grid.Row="0" Name="dagTypeMateriel" Margin="4" ItemsSource="{Binding Rondes}" SelectedItem="{Binding Ronde}" AutoGenerateColumns="True" IsReadOnly="True" />
-        <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Orientation="Horizontal" Margin="4" >
-            <Button Name="btnImporterScans" Margin="4" Content="Importer le fichier de codes-barres" />
+        <DataGrid Grid.Column="0" Grid.Row="0" Name="dagTypeMateriel" Margin="4" ItemsSource="{Binding LesRondes}" 
+                  SelectedItem="{Binding LaRonde}" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="dagTypeMateriel_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
+                <DataGridTextColumn Header="Date de la ronde" Binding="{Binding Date, StringFormat=dd.MM.yyyy}" />
+                <DataGridTextColumn Header="Date de l'import" Binding="{Binding ImportationDate, StringFormat=dd.MM.yyyy}" />
+                <DataGridCheckBoxColumn Header="Importation faite" Binding="{Binding ImportationFaite, Mode=OneWay}" />
+                <DataGridTextColumn Header="Chemin complet du fichier utilisé à l'importation" 
+                     Binding="{Binding ImportationCheminCompletFichier, Converter={StaticResource ValueConvertor}}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <local:DetailleCodesBarreSelonRonde x:Name="CodesBarreSelonRondeDetails" Grid.Row="1" />
+        <StackPanel Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Orientation="Horizontal" Margin="4" >
+            <Button Name="btnImporterScans" Margin="4" Content="Importer le fichier de codes-barres" Command="{Binding NouvelleImportation}" />
+            <Button Name="btnAnnulerLImporte" Margin="4" Content="Annuler" Visibility="{Binding AnnulerImportVisibility}" Command="{Binding AnnulationImportation}" />
+            <Button Name="btnEnregRondes" Margin="4" Content="Enregistre" Visibility="Collapsed"  Command="{Binding Ajoute}" />
+            <Label Content="    " />
         </StackPanel>
     </Grid>
 </Window>

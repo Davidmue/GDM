@@ -23,8 +23,9 @@ namespace GestionDuMaterielDb.Model
     
         public int Id { get; set; }
         public System.DateTime Date { get; set; }
-        public string NomFichier { get; set; }
-        public string CheminFichierSource { get; set; }
+        public Nullable<System.DateTime> ImportationDate { get; set; }
+        public string ImportationNomFichier { get; set; }
+        public string ImportationCheminDossierSource { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CodeBarre> CodeBarres { get; set; }

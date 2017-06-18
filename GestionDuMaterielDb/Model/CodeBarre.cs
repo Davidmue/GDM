@@ -17,6 +17,8 @@ namespace GestionDuMaterielDb.Model
         public int Id { get; set; }
         public string NoDeSerie { get; set; }
         public int RondeId { get; set; }
+        public bool Ignore { get; set; }
+        public string Interpretation { get; set; }
     
         public virtual Ronde Ronde { get; set; }
     }

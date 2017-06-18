@@ -10,19 +10,27 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GestionDuMateriel.ViewModel;
 
 namespace GestionDuMateriel.View
 {
     /// <summary>
-    /// Logique d'interaction pour ContenuRonde.xaml
+    /// Logique d'interaction pour DetaillePieces.xaml
     /// </summary>
-    public partial class ContenuRonde : Window
+    public partial class DetaillePieces : UserControl
     {
-        public ContenuRonde()
+
+        public DetaillePieces()
         {
             InitializeComponent();
-            // liste les codes barres de la ronde ...
+            DataContext = new PiecesVM(new PlansVM());
+        }
+
+        public void ClosingParentWindow()
+        {
+            btnEnregMateriel.Command.Execute(null);
         }
     }
 }

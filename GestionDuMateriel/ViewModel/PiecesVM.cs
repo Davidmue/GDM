@@ -101,7 +101,7 @@ namespace GestionDuMateriel.ViewModel
                 {
                     plan = _plansVMDependance.Selection; 
                 }
-                nouvellePiece.Plan = _plansVMDependance.Plans[0];
+                nouvellePiece.Plan = plan;
                 //
                 // nouvellePiece.Id  // Entity gère ceci ! 
                 //
