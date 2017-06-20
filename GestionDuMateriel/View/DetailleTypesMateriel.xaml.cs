@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GestionDuMateriel.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,29 +13,26 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using GestionDuMateriel.ViewModel;
 
 namespace GestionDuMateriel.View
 {
     /// <summary>
-    /// Logique d'interaction pour DetaillePieces.xaml
+    /// Logique d'interaction pour DetailleTypesMateriel.xaml
     /// </summary>
-    public partial class DetaillePieces : UserControl
+    public partial class DetailleTypesMateriel : UserControl
     {
-
-        // constructeurs ... 
-        private DetaillePieces()
+        private DetailleTypesMateriel()
         {
-            InitializeComponent();            
+            InitializeComponent();
         }
-        public DetaillePieces(PiecesVM pieceVM) : this()
+        public DetailleTypesMateriel(TypesMaterielVM typeMaterielVM) : this()
         {
-            DataContext = pieceVM; 
+            DataContext = typeMaterielVM;
         }
 
         public void ClosingParentWindow()
         {
-            btnEnregMateriel.Command.Execute(null);
+            btnEnregistrer.Command.Execute(null);
         }
     }
 }

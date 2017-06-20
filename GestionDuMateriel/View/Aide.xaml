@@ -1,22 +1,20 @@
-﻿<Window x:Class="GestionDuMateriel.View.Aide"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:GestionDuMateriel.View"
-        mc:Ignorable="d"
-        Title="Aide" Height="300" Width="300">
+﻿<UserControl x:Class="GestionDuMateriel.View.Aide"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GestionDuMateriel.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-
+        <TextBlock TextWrapping="Wrap">
+            Aide : <LineBreak></LineBreak>
+            Commencez par scanner un plan de vos bureaux ! Puis importez-le ! <LineBreak></LineBreak>
+            Remplissez ensuite les informations relatives aux pièces (aux bureaux) ! <LineBreak></LineBreak>
+            Imprimez des codes-barres et collez-les en dessous des meubles de bureau ! <LineBreak></LineBreak>
+            Remplissez la base (employés, mobiliers et matériel) ! Vous êtes prêt pour 
+            importer vos scan <LineBreak></LineBreak>
+            :-)
+        </TextBlock>
     </Grid>
-</Window>
+</UserControl>

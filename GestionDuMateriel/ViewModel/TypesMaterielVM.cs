@@ -17,14 +17,14 @@ namespace GestionDuMateriel.ViewModel
 
         public TypesMaterielVM()
         {
-            TypesMateriel = new ObservableCollection<TypeMateriel>(App.Entities().TypeMateriels);
-            if (TypesMateriel.Count == 0)
+            _typesMateriel = new ObservableCollection<TypeMateriel>(App.Entities().TypeMateriels);
+            if (_typesMateriel.Count == 0)
             {
                 NouveauType();
             }
             else
             {
-                _selection = TypesMateriel[0]; 
+                _selection = _typesMateriel[0]; 
             }
         }
 

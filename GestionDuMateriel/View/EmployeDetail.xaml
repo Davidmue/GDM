@@ -4,36 +4,41 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GestionDuMateriel.View"
+             xmlns:local1="clr-namespace:GestionDuMateriel.Helpers"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <local1:ValueConvertor x:Key="ValueConvertor" />
+        <local1:MultiValueConverter x:Key="MultiValueConverter" />
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Label Content="ID : " Grid.Row="0" Grid.Column="0"/>
-        <Label Content="{Binding LEmploye.Id}" Grid.Row="0" Grid.Column="1"/>
-        <Label Content="Nom : " Grid.Row="2" Grid.Column="0" />
-        <TextBox Text="{Binding LEmploye.Nom}" Grid.Row="2" Grid.Column="1" />
-        <Label Content="Prénom : " Grid.Row="3" Grid.Column="0" />
-        <TextBox Text="{Binding LEmploye.Prenom}" Grid.Row="3" Grid.Column="1" />
-        <Label Content="Date entrée : " Grid.Row="4" Grid.Column="0"  />
-        <DatePicker SelectedDate="{Binding LEmploye.DateEntree}" Grid.Row="4" Grid.Column="1" />
-        <Label Content="Description d'entrée : " Grid.Row="5" Grid.Column="0" />
-        <TextBox Text="{Binding LEmploye.EntreeDescription}" Grid.Row="5" Grid.Column="1" />
-        <Label Content="Date de sortie : " Grid.Row="6" Grid.Column="0" />
-        <DatePicker SelectedDate="{Binding LEmploye.DateSortie}" Grid.Row="6" Grid.Column="1" />
-        <Label Content="Description sortie : " Grid.Row="7" Grid.Column="0" />
-        <TextBox Text="{Binding LEmploye.SortieDescription}" Grid.Row="7" Grid.Column="1" />
+        <Label Content="ID : " Grid.Row="0" Grid.Column="0" Margin="4"/>
+        <Label Content="{Binding LEmploye.Id}" Grid.Row="0" Grid.Column="1" Margin="4"/>
+        <Label Content="Nom : " Grid.Row="2" Grid.Column="0" Margin="4" />
+        <TextBox Text="{Binding LEmploye.Nom, Converter={StaticResource ValueConvertor}}" Grid.Row="2" Grid.Column="1" Margin="4" />
+        <Label Content="Prénom : " Grid.Row="3" Grid.Column="0" Margin="4" />
+        <TextBox Text="{Binding LEmploye.Prenom, Converter={StaticResource ValueConvertor}}" Grid.Row="3" Grid.Column="1" Margin="4" />
+        <Label Content="Date entrée : " Grid.Row="4" Grid.Column="0" Margin="4" />
+        <DatePicker SelectedDate="{Binding LEmploye.DateEntree}" Grid.Row="4" Grid.Column="1" Margin="4" />
+        <Label Content="Description d'entrée : " Grid.Row="5" Grid.Column="0" Margin="4" />
+        <TextBox Text="{Binding LEmploye.EntreeDescription, Converter={StaticResource ValueConvertor}}" Grid.Row="5" Grid.Column="1" Margin="4" />
+        <Label Content="Date de sortie : " Grid.Row="6" Grid.Column="0" Margin="4" />
+        <DatePicker SelectedDate="{Binding LEmploye.DateSortie}" Grid.Row="6" Grid.Column="1" Margin="4" />
+        <Label Content="Description sortie : " Grid.Row="7" Grid.Column="0" Margin="4" />
+        <TextBox Text="{Binding LEmploye.SortieDescription, Converter={StaticResource ValueConvertor}}" Grid.Row="7" Grid.Column="1" Margin="4" />
     </Grid>
 </UserControl>

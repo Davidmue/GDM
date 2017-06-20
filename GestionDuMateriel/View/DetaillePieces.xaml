@@ -4,8 +4,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:local="clr-namespace:GestionDuMateriel.View"
+    xmlns:local1="clr-namespace:GestionDuMateriel.Helpers"
     mc:Ignorable="d" 
     d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <local1:ValueConvertor x:Key="ValueConvertor" />
+        <local1:MultiValueConverter x:Key="MultiValueConverter" />
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -15,8 +20,10 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Label Content="Pièces" Grid.Column="0" Grid.Row="0" />
-        <Grid Grid.Column="0" Grid.Row="1">
+        <TextBlock Grid.Row="0" FontSize="20" Margin="8">
+            <Bold>Pièces</Bold>
+        </TextBlock>
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
@@ -25,21 +32,20 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <DataGrid x:Name="dgrMateriels" Grid.Column="0" Margin="4" Grid.Row="0"  
-    ItemsSource="{Binding LesPieces}" SelectedItem="{Binding LaPiece}" AutoGenerateColumns="False" 
-    IsReadOnly="True">
+        ItemsSource="{Binding LesPieces}" SelectedItem="{Binding LaPiece}" AutoGenerateColumns="False" 
+        IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
-                    <DataGridTextColumn Header="Description" Binding="{Binding Description}" />
-                    <DataGridTextColumn Header="Plan" Binding="{Binding Plan.Description}" />
+                    <DataGridTextColumn Header="Description" Binding="{Binding Description, Converter={StaticResource ValueConvertor}}" />
+                    <DataGridTextColumn Header="Plan" Binding="{Binding Plan.Description, Converter={StaticResource ValueConvertor}}" />
                 </DataGrid.Columns>
             </DataGrid>
             <local:PieceDetail x:Name="PieceDetails" Grid.Column="0" Grid.Row="1" Width="Auto" />
         </Grid>
-        <StackPanel x:Name="stpDownPan" Grid.ColumnSpan="3" Grid.Column="0" Margin="4" Grid.Row="2" Grid.RowSpan="1"
-    Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button x:Name="btnAjoutMateriel" Command="{Binding Ajoute}" Content="Ajout d'une pièce" Margin="4" />
-            <Button x:Name="btnSupprMateriel" Command="{Binding Supprime}" Content="Suppression" Margin="4" />
-            <Button x:Name="btnEnregMateriel" Command="{Binding Enregistre}" Content="Enregistrement" Margin="4" Visibility="Collapsed" />
+        <StackPanel Grid.Row="2" x:Name="stpDownPan" Margin="4" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="btnAjoutMateriel" Command="{Binding Ajoute}" Content="Ajouter" Margin="4" />
+            <Button x:Name="btnSupprMateriel" Command="{Binding Supprime}" Content="Supprimer" Margin="4" />
+            <Button x:Name="btnEnregMateriel" Command="{Binding Enregistre}" Content="Enregistrer" Margin="4" Visibility="Collapsed" />
             <Label Content="       " />
         </StackPanel>
     </Grid>

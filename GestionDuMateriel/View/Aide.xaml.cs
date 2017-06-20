@@ -10,6 +10,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace GestionDuMateriel.View
@@ -17,7 +18,7 @@ namespace GestionDuMateriel.View
     /// <summary>
     /// Logique d'interaction pour Aide.xaml
     /// </summary>
-    public partial class Aide : Window
+    public partial class Aide : UserControl
     {
         public Aide()
         {

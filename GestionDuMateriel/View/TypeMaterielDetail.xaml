@@ -4,9 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GestionDuMateriel.View"
+             xmlns:local1="clr-namespace:GestionDuMateriel.Helpers"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              Name="ufoMaterielDetails">
+    <UserControl.Resources>
+        <local1:ValueConvertor x:Key="ValueConvertor" />
+        <local1:MultiValueConverter x:Key="MultiValueConverter" />
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -16,9 +21,9 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Label Grid.Column="0" Grid.Row="0" Content="Id" />
-        <Label Grid.Column="0" Grid.Row="1" Content="{Binding Id, Mode=TwoWay}" />
-        <Label Grid.Column="1" Grid.Row="0" Content="Description" />
-        <TextBox Name="tbxDescription" Grid.Column="1" Grid.Row="1" Text="{Binding Description, Mode=TwoWay}" />
+        <Label Grid.Column="0" Grid.Row="0" Content="Id" Margin="4" />
+        <Label Grid.Column="0" Grid.Row="1" Content="{Binding Id, Mode=TwoWay}" Margin="4" />
+        <Label Grid.Column="1" Grid.Row="0" Content="Description" Margin="4" />
+        <TextBox Name="tbxDescription" Grid.Column="1" Grid.Row="1" Text="{Binding Description, Mode=TwoWay, Converter={StaticResource ValueConvertor}}" Margin="4" />
     </Grid>
 </UserControl>

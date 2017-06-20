@@ -29,10 +29,14 @@ namespace GestionDuMateriel.View
 
         #region interface
 
-        public DetaillePlans()
+        // constructeurs ... 
+        private DetaillePlans()
         {
             InitializeComponent();
-            // DataContext = new PlansVM();
+        }
+        public DetaillePlans(PlansVM plansVM) : this()
+        {
+            DataContext = plansVM;
             _plansAffiches = new List<AffichePlan>();
             _dlgImporterPlan = new ImporterPlan(); // la fenêtre de dialogue est créée 
             //                              en même temps que la fenêtre pour gérer les plans. 

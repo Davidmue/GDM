@@ -11,19 +11,29 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace GestionDuMateriel.View
 {
     /// <summary>
-    /// Logique d'interaction pour AfficheTypesMateriel.xaml
+    /// Logique d'interaction pour DetailleMeubles.xaml
     /// </summary>
-    public partial class AfficheTypesMateriel : Window
+    public partial class DetailleMeubles : UserControl
     {
-        public AfficheTypesMateriel()
+        // constructeurs ... 
+        private DetailleMeubles()
         {
             InitializeComponent();
-            DataContext = new TypesMaterielVM(); 
+        }
+        public DetailleMeubles(MeublesVM meublesVM) : this()
+        {
+            DataContext = meublesVM;
+        }
+
+        public void ClosingParentWindow()
+        {
+            btnEnregMeuble.Command.Execute(null);
         }
     }
 }

@@ -9,17 +9,17 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" Content="Plans" />
-        <DataGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Name="dgrPlans" ItemsSource="{Binding Plans}" SelectedItem="{Binding Selection}" AutoGenerateColumns="False" IsReadOnly="True">
+        <TextBlock Grid.Row="0" FontSize="20" Margin="8">
+            <Bold>Plans</Bold>
+        </TextBlock>
+        <DataGrid Grid.Row="1" Name="dgrPlans" ItemsSource="{Binding Plans}" SelectedItem="{Binding Selection}" 
+                  AutoGenerateColumns="False" IsReadOnly="True" Margin="4" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="20" />
                 <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="150" />
@@ -28,8 +28,11 @@
                 <DataGridTextColumn Header="Date de l'import" Binding="{Binding DateImport}" Width="150" />
             </DataGrid.Columns>
         </DataGrid>
-        <Button Grid.Row="2" Grid.Column="0" Name="btnAfficherLePlan" Content="Afficher le plan sélectionné" Click="btnAfficherLePlan_Click" />
-        <Button Grid.Row="2" Grid.Column="1" Name="btnAjouterUnPlan" Content="Ajouter un plan" Click="btnAjouterUnPlan_Click" />
-        <Button Grid.Row="2" Grid.Column="2" Name="btnSupprimerLePlan" Content="Supprimer le plan sélectionné" Command="{Binding Delete}" />
+        <StackPanel Grid.Row="2" x:Name="stpDownPan" Margin="4" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="btnAfficherLePlan" Content="Afficher" Click="btnAfficherLePlan_Click" Margin="4" />
+            <Button x:Name="btnAjouterUnPlan" Content="Ajouter" Click="btnAjouterUnPlan_Click" Margin="4" />
+            <Button x:Name="btnSupprimerLePlan" Content="Supprimer" Margin="4" Command="{Binding Delete}" />
+            <Label Content="       " />
+        </StackPanel>
     </Grid>
 </UserControl>

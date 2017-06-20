@@ -1,5 +1,4 @@
-﻿using GestionDuMateriel.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,25 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace GestionDuMateriel.View
 {
     /// <summary>
-    /// Logique d'interaction pour AfficheMeubles.xaml
+    /// Logique d'interaction pour DetailleMateriels.xaml
     /// </summary>
-    public partial class AfficheMeubles : Window
+    public partial class DetailleMateriels : UserControl
     {
-        public AfficheMeubles()
+        public DetailleMateriels()
         {
             InitializeComponent();
-            DataContext = new MeublesVM(new PiecesVM(new PlansVM()), new EmployesVM()); 
         }
-
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            btnEnregMateriel.Command.Execute(null);
-        }
-
     }
 }

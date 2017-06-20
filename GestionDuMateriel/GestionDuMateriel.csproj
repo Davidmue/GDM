@@ -76,23 +76,14 @@
     <Compile Include="ViewModel\PlansVM.cs" />
     <Compile Include="ViewModel\RondesVM.cs" />
     <Compile Include="ViewModel\TypesMaterielVM.cs" />
-    <Compile Include="View\AfficheEmployes.xaml.cs">
-      <DependentUpon>AfficheEmployes.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\AfficheMateriel.xaml.cs">
       <DependentUpon>AfficheMateriel.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\AfficheMeubles.xaml.cs">
-      <DependentUpon>AfficheMeubles.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\AffichePlan.xaml.cs">
       <DependentUpon>AffichePlan.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\AfficheRondes.xaml.cs">
       <DependentUpon>AfficheRondes.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\AfficheTypesMateriel.xaml.cs">
-      <DependentUpon>AfficheTypesMateriel.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Aide.xaml.cs">
       <DependentUpon>Aide.xaml</DependentUpon>
@@ -103,11 +94,23 @@
     <Compile Include="View\DetailleCodesBarreSelonRonde.xaml.cs">
       <DependentUpon>DetailleCodesBarreSelonRonde.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\DetailleEmployes.xaml.cs">
+      <DependentUpon>DetailleEmployes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DetailleMateriels.xaml.cs">
+      <DependentUpon>DetailleMateriels.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DetailleMeubles.xaml.cs">
+      <DependentUpon>DetailleMeubles.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\DetaillePieces.xaml.cs">
       <DependentUpon>DetaillePieces.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DetaillePlans.xaml.cs">
       <DependentUpon>DetaillePlans.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DetailleTypesMateriel.xaml.cs">
+      <DependentUpon>DetailleTypesMateriel.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\EmployeDetail.xaml.cs">
       <DependentUpon>EmployeDetail.xaml</DependentUpon>
@@ -153,15 +156,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\AfficheEmployes.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\AfficheMateriel.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\AfficheMeubles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -170,10 +165,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AfficheRondes.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\AfficheTypesMateriel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -189,11 +180,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\DetailleEmployes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DetailleMateriels.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DetailleMeubles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\DetaillePieces.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\DetaillePlans.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DetailleTypesMateriel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

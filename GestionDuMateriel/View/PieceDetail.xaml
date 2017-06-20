@@ -12,15 +12,15 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Orientation="Horizontal">
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="4">
             <Label Content="Id : " />
             <Label Content="{Binding LaPiece.Id}" />
         </StackPanel>
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="4">
             <Label Content="Description  : " />
             <TextBox Text="{Binding LaPiece.Description}" />
         </StackPanel>
-        <StackPanel Grid.Row="2" Orientation="Horizontal">
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="4">
             <Label Content="Plan : " />
             <ComboBox x:Name="cboTypeMateriel" ItemsSource="{Binding LesPlans}" SelectedItem="{Binding LaPiece.Plan}">
                 <ComboBox.ItemTemplate>

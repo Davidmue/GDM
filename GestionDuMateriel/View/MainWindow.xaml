@@ -25,27 +25,20 @@
                 <MenuItem Header="_Autre" />
             </MenuItem>
         </Menu>
-        <Grid Grid.Row="1" Grid.Column="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <StackPanel Orientation="Vertical">
-                <Button Name="btnPlans" Content="Plans" Click="btnPlans_Click" />
-                <Button Name="btnPieces" Content="Pièces" Click="btnPieces_Click" />
-                <Button Name="btnMeubles" Content="Meubles" />
-                <Button Name="btnMateriel" Content="Matériel" />
-                <Button Name="btnEmployes" Content="Employés" />
-                <Button Name="btnRondes" Content="Rondes" />
-                <Button Name="btnOptions" Content="Options" />
-                <Button Name="btnApropos" Content="À propos" />
-                <Button Name="btnAide" Content="Aide" />
-            </StackPanel>
-        </Grid>
-        <StackPanel x:Name="spaContent" Grid.Row="1" Grid.Column="1">
+        <StackPanel Grid.Row="1" Grid.Column="0" x:Name="spaMenu" Orientation="Vertical">
+            <Button Name="btnPlans" Content="Plans" Click="btnPlans_Click" />
+            <Button Name="btnPieces" Content="Pièces" Click="btnPieces_Click" />
+            <Button Name="btnMeubles" Content="Mobiliers" Click="btnMeubles_Click" />
+            <Button Name="btnEmployes" Content="Employés" Click="btnEmployes_Click" />
+            <Button Name="btnTypes" Content="Types matériel" Click="btnTypes_Click" />
+            <Button Name="btnMateriels" Content="Matériels" />
+            <Button Name="btnRondes" Content="Rondes" />
+            <Button Name="btnOptions" Content="Options" />
+            <Button Name="btnApropos" Content="À propos" />
+            <Button Name="btnAide" Content="Aide" />
+        </StackPanel>
+        <Grid Grid.Row="1" Grid.Column="1" x:Name="spaContent">
             
-        </StackPanel> 
+        </Grid>
     </Grid>
 </Window>
