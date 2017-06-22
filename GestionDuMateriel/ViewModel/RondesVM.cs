@@ -154,8 +154,8 @@ namespace GestionDuMateriel.ViewModel
                     _annulationImportEnCours = true; 
                     Suppression();
                     _annulationImportEnCours = false; 
+                    FirePropertyChanged("AnnulerImportVisibility");
                 }
-                FirePropertyChanged("AnnulerImportVisibility");
             }
         }
 

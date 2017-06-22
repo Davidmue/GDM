@@ -31,7 +31,6 @@ namespace GestionDuMateriel.View
         public DetailleRondes(RondesVM rondesVM) : this()
         {
             DataContext = rondesVM;
-            _dlgImportCodesBarre = new ImporteCodelsBarre(rondesVM);
         }
 
         public void ClosingParentWindow()
@@ -39,16 +38,21 @@ namespace GestionDuMateriel.View
             //  (le bouton Enregistrer n'est pas visible (pas cliquable) par l'utilisateur ... 
             // appel de la commande "Enregistre" à la fermeture du formulaire ... 
             btnEnregRondes.Command.Execute(null);
-            _dlgImportCodesBarre.DialogueSeraFerme = true;
-            _dlgImportCodesBarre.Close(); // la boîte de dialogue est fermée en même temps que 
 
         }
 
         private void btnImporterScans_Click(object sender, RoutedEventArgs e)
         {
-            btnImporterScans.Command.Execute(null);
-            
-            _dlgImportCodesBarre.ShowDialog(); 
+            btnNouvelleRonde.Command.Execute(null);
+            _dlgImportCodesBarre = new ImporteCodelsBarre((DataContext as RondesVM));
+            _dlgImportCodesBarre.ShowDialog();
+            //
+            // do the job ...
+            //
+            _dlgImportCodesBarre.DialogueSeraFerme = true;
+            _dlgImportCodesBarre.Close(); // la boîte de dialogue est fermée en même temps que 
+            //
+            btnAnnulerLImporte.Command.Execute(null); 
         }
 
         // SelectionChanged="dagTypeMateriel_SelectionChanged"

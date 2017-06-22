@@ -56,8 +56,16 @@ namespace GestionDuMateriel.View
             if (openFileDialog.ShowDialog() == true)
             {
                 string cheminComplet = openFileDialog.FileName;
-                (DataContext as RondesVM).LaRonde.ImportationCheminDossierSource = System.IO.Path.GetDirectoryName(cheminComplet);
-                (DataContext as RondesVM).LaRonde.ImportationNomFichier = System.IO.Path.GetFileName(cheminComplet);
+                tbxCheminFichier.Focus(); 
+                tbxCheminFichier.Text = cheminComplet;
+                btnChoisiFichier.Focus();  
+
+                //tbxFile.Text = System.IO.Path.GetFileName(cheminComplet);
+                //tbxFolder.Text = System.IO.Path.GetDirectoryName(cheminComplet);
+
+
+//                (DataContext as RondesVM).LaRonde.ImportationCheminDossierSource = System.IO.Path.GetDirectoryName(cheminComplet);
+//                (DataContext as RondesVM).LaRonde.ImportationNomFichier = System.IO.Path.GetFileName(cheminComplet);
                 // tbxCheminFichier.Text = (DataContext as RondesVM).LaRonde.ImportationCheminCompletFichier; 
             }
             // btnMettreAJour.Command.Execute(null); 
@@ -76,7 +84,8 @@ namespace GestionDuMateriel.View
 
         private void btnImporter_Click(object sender, RoutedEventArgs e)
         {
-            btnMettreAJour.Command.Execute(null);
+            MessageBox.Show((DataContext as RondesVM).LaRonde.ImportationNomFichier);
+            MessageBox.Show((DataContext as RondesVM).LaRonde.ImportationCheminDossierSource);
             this.Hide();
         }
     }
