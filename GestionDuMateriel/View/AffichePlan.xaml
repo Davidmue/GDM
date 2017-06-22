@@ -18,17 +18,16 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left" Width="Auto" Height="Auto">
-                <TextBlock>
-                    <TextBlock.Text>
-                        <MultiBinding Converter="{StaticResource MultiValueConverter}">
-                            <Binding Path="DescriptionImagePlan" />
-                            <Binding Path="Id" />
-                            <Binding Path="DateImportFormatee" />
-                        </MultiBinding>
-                    </TextBlock.Text>
-                </TextBlock>
-
-            </StackPanel>
+            <TextBlock>
+                <TextBlock.Text>
+                    <MultiBinding Converter="{StaticResource MultiValueConverter}">
+                        <Binding Path="DescriptionImagePlan" />
+                        <Binding Path="Id" />
+                        <Binding Path="DateImportFormatee" />
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+        </StackPanel>
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" >
                 <Label Content="Zoom ( ratio " />
                 <Label Content="{Binding RatioDeuxVirgules}" />

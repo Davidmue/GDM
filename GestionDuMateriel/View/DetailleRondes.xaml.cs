@@ -17,26 +17,41 @@ using System.Windows.Shapes;
 namespace GestionDuMateriel.View
 {
     /// <summary>
-    /// Logique d'interaction pour DetailleMateriels.xaml
+    /// Logique d'interaction pour DetailleRondes.xaml
     /// </summary>
-    public partial class DetailleMateriels : UserControl
+    public partial class DetailleRondes : UserControl
     {
+        private ImporteCodelsBarre _dlgImportCodesBarre;
+
         // constructeurs ... 
-        private DetailleMateriels()
+        private DetailleRondes()
         {
             InitializeComponent();
         }
-        public DetailleMateriels(MaterielsVM materielsVM) : this()
+        public DetailleRondes(RondesVM rondesVM) : this()
         {
-            DataContext = materielsVM;
+            DataContext = rondesVM;
+            _dlgImportCodesBarre = new ImporteCodelsBarre(rondesVM);
         }
 
         public void ClosingParentWindow()
         {
             //  (le bouton Enregistrer n'est pas visible (pas cliquable) par l'utilisateur ... 
             // appel de la commande "Enregistre" à la fermeture du formulaire ... 
-            btnEnregMateriel.Command.Execute(null);
+            btnEnregRondes.Command.Execute(null);
+            _dlgImportCodesBarre.DialogueSeraFerme = true;
+            _dlgImportCodesBarre.Close(); // la boîte de dialogue est fermée en même temps que 
+
         }
+
+        private void btnImporterScans_Click(object sender, RoutedEventArgs e)
+        {
+            btnImporterScans.Command.Execute(null);
+            
+            _dlgImportCodesBarre.ShowDialog(); 
+        }
+
+        // SelectionChanged="dagTypeMateriel_SelectionChanged"
 
     }
 }

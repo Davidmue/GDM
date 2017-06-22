@@ -4,9 +4,60 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GestionDuMateriel.View"
+             xmlns:local1="clr-namespace:GestionDuMateriel.Helpers"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <local1:ValueConvertor x:Key="ValueConvertor" />
+        <local1:MultiValueConverter x:Key="MultiValueConverter" />
+    </UserControl.Resources>
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" MinHeight="50"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" FontSize="20" Margin="8">
+            <Bold>Matériels</Bold>
+        </TextBlock>
+        <DataGrid x:Name="dgrMateriels" Grid.ColumnSpan="3" Grid.Column="0" Margin="4" Grid.Row="1" Grid.RowSpan="1" 
+                  ItemsSource="{Binding LesMateriels}" SelectedItem="{Binding LeMateriel}" AutoGenerateColumns="False" 
+                  IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
+                <DataGridTextColumn Header="Code barre" Binding="{Binding CodeBarre, Converter={StaticResource ValueConvertor}}" />
+                <DataGridTextColumn Header="Entrée" Binding="{Binding Entree, StringFormat=dd.MM.yyyy}" />
+                <DataGridTextColumn Header="Description entrée" Binding="{Binding DescriptionEntree, Converter={StaticResource ValueConvertor}}" />
+                <DataGridTextColumn Header="Sortie" Binding="{Binding Sortie, StringFormat=dd.MM.yyyy}" />
+                <DataGridTextColumn Header="Description sortie" Binding="{Binding DescriptionSortie, Converter={StaticResource ValueConvertor}}" />
+                <DataGridTextColumn Header="Achat" Binding="{Binding Achat, StringFormat=dd.MM.yyyy}" />
+                <DataGridCheckBoxColumn Header="Garantie" IsThreeState="False" Binding="{Binding Garantie}"/>
+                <DataGridTextColumn Header="Echéance garantie" Binding="{Binding GarantieEcheance, StringFormat=dd.MM.yyyy}" />
+                <DataGridTextColumn Header="Prix d'achat"  Binding="{Binding PrixAchat, StringFormat=0.00}">
+                    <DataGridTextColumn.CellStyle>
+                        <Style>
+                            <Setter Property="FrameworkElement.HorizontalAlignment" Value="Right"/>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Type matériel" Binding="{Binding TypeMateriel.Description, Converter={StaticResource ValueConvertor}}" />
+                <DataGridTextColumn Header="Dernier aperçu" Binding="{Binding DernierApercu}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <local:MaterielDetail x:Name="MaterielDetails" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" Grid.RowSpan="1" />
+
+        <StackPanel x:Name="stpDownPan" Grid.ColumnSpan="3" Grid.Column="0" Margin="4" Grid.Row="4" Grid.RowSpan="1"
+                    Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="btnAjoutMateriel" Command="{Binding Ajoute}" Content="Ajouter" Margin="4" />
+            <Button x:Name="btnSupprMateriel" Command="{Binding Supprime}" Content="Supprimer" Margin="4" />
+            <Button x:Name="btnEnregMateriel" Command="{Binding Enregistre}" Content="Enregistrer" Margin="4" Visibility="Collapsed" />
+            <Label Content="       " />
+        </StackPanel>
     </Grid>
 </UserControl>

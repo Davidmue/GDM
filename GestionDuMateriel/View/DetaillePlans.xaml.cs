@@ -116,8 +116,8 @@ namespace GestionDuMateriel.View
             _dlgImporterPlan.Close(); // la boîte de dialogue est fermée en même temps que 
             //                la fenêtre pour gérer les plans. 
             //
-            // sauvegarde
-            App.Entities().SaveChanges();
+            //// sauvegarde
+            //App.Entities().SaveChanges();
 
         }
 

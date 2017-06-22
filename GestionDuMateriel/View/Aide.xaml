@@ -7,14 +7,23 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <TextBlock TextWrapping="Wrap">
-            Aide : <LineBreak></LineBreak>
-            Commencez par scanner un plan de vos bureaux ! Puis importez-le ! <LineBreak></LineBreak>
-            Remplissez ensuite les informations relatives aux pièces (aux bureaux) ! <LineBreak></LineBreak>
-            Imprimez des codes-barres et collez-les en dessous des meubles de bureau ! <LineBreak></LineBreak>
-            Remplissez la base (employés, mobiliers et matériel) ! Vous êtes prêt pour 
-            importer vos scan <LineBreak></LineBreak>
-            :-)
-        </TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <StackPanel>
+                <TextBlock FontSize="20" Margin="8">
+                    <Bold>Aide</Bold>
+                </TextBlock>
+                <TextBlock TextWrapping="Wrap" Margin="4" HorizontalAlignment="Stretch" >
+                    <Bold>Utilisation de cet outil : </Bold><LineBreak></LineBreak>
+                    Commencez par scanner un plan de vos bureaux ! Puis importez-le ! <LineBreak></LineBreak>
+                    Remplissez ensuite les informations relatives aux pièces (aux bureaux) ! <LineBreak></LineBreak>
+                    Imprimez des codes-barres et collez-les en dessous des meubles de bureau ! <LineBreak></LineBreak>
+                    Remplissez la base (employés, mobiliers et matériel) ! Vous êtes prêt pour importer vos scans <LineBreak></LineBreak>
+                    :-)
+                </TextBlock>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </UserControl>

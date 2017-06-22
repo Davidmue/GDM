@@ -32,7 +32,15 @@ namespace GestionDuMateriel
         private EmployesVM _employesVM; 
         private DetailleEmployes _detailleEmployes;
         private TypesMaterielVM _typesMaterielVM;
-        private DetailleTypesMateriel _detailleTypesMateriel; 
+        private DetailleTypesMateriel _detailleTypesMateriel;
+        private MaterielsVM _materiels;
+        private DetailleMateriels _detailleMateriels;
+        private RondesVM _rondes;
+        private DetailleRondes _detailleRondes;
+
+        //
+        private Aide _aide;
+        private Apropos _aPropos;
 
         public MainWindow()
         {
@@ -50,17 +58,27 @@ namespace GestionDuMateriel
             _detailleMeubles = new DetailleMeubles(_meublesVM);
             _typesMaterielVM = new TypesMaterielVM();
             _detailleTypesMateriel = new DetailleTypesMateriel(_typesMaterielVM);
-
+            _materiels = new MaterielsVM(_typesMaterielVM);
+            _detailleMateriels = new DetailleMateriels(_materiels);
+            _rondes = new RondesVM();
+            _detailleRondes = new DetailleRondes(_rondes);
+            //
+            _aPropos = new Apropos();
+            _aide = new Aide();
+            //
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             // supprime les objets dans l'ordre inverse de création ... 
+            _detailleRondes.ClosingParentWindow();
+            _detailleMateriels.ClosingParentWindow();
             _detailleTypesMateriel.ClosingParentWindow();
             _detailleMeubles.ClosingParentWindow();
             _detaillePieces.ClosingParentWindow();
             _detaillePlans.ClosingParentWindow();
             _detailleEmployes.ClosingParentWindow();
+            // rien à faire pour _aide et _aPropos ... 
         }
 
         private void QuitAppMenuItem_Click(object sender, RoutedEventArgs e)
@@ -96,6 +114,32 @@ namespace GestionDuMateriel
         {
             spaContent.Children.Clear();
             spaContent.Children.Add(_detailleTypesMateriel);
+        }
+
+        private void btnMateriels_Click(object sender, RoutedEventArgs e)
+        {
+            spaContent.Children.Clear();
+            spaContent.Children.Add(_detailleMateriels);
+        }
+
+        private void btnRondes_Click(object sender, RoutedEventArgs e)
+        {
+            spaContent.Children.Clear();
+            spaContent.Children.Add(_detailleRondes);
+        }
+
+        //
+
+        private void btnAide_Click(object sender, RoutedEventArgs e)
+        {
+            spaContent.Children.Clear();
+            spaContent.Children.Add(_aide);
+        }
+
+        private void btnApropos_Click(object sender, RoutedEventArgs e)
+        {
+            spaContent.Children.Clear();
+            spaContent.Children.Add(_aPropos);
         }
 
     }

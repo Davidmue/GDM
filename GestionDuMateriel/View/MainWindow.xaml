@@ -31,11 +31,11 @@
             <Button Name="btnMeubles" Content="Mobiliers" Click="btnMeubles_Click" />
             <Button Name="btnEmployes" Content="Employés" Click="btnEmployes_Click" />
             <Button Name="btnTypes" Content="Types matériel" Click="btnTypes_Click" />
-            <Button Name="btnMateriels" Content="Matériels" />
-            <Button Name="btnRondes" Content="Rondes" />
+            <Button Name="btnMateriels" Content="Matériels" Click="btnMateriels_Click" />
+            <Button Name="btnRondes" Content="Rondes" Click="btnRondes_Click" />
             <Button Name="btnOptions" Content="Options" />
-            <Button Name="btnApropos" Content="À propos" />
-            <Button Name="btnAide" Content="Aide" />
+            <Button Name="btnApropos" Content="À propos" Click="btnApropos_Click" />
+            <Button Name="btnAide" Content="Aide" Click="btnAide_Click" />
         </StackPanel>
         <Grid Grid.Row="1" Grid.Column="1" x:Name="spaContent">
             

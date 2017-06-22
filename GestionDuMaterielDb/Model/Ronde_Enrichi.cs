@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,7 +32,7 @@ namespace GestionDuMaterielDb.Model
                     // dossier est null ! 
                     if (!(string.IsNullOrEmpty(ImportationNomFichier)))
                     {
-                        result = ImportationCheminDossierSource;
+                        result = ImportationNomFichier;
                     }
                     else
                     {
@@ -40,6 +41,27 @@ namespace GestionDuMaterielDb.Model
                     }
                 }
                 return result; 
+            }
+            set
+            {
+                if(string.IsNullOrEmpty(value))
+                {
+                    ImportationCheminDossierSource = "";
+                    ImportationNomFichier = ""; 
+                }
+                else
+                {
+                    if (File.Exists(value))
+                    {
+                        ImportationCheminDossierSource = Path.GetDirectoryName(value);
+                        ImportationNomFichier = Path.GetFileName(value); 
+                    }
+                    else
+                    {
+                        ImportationCheminDossierSource = "";
+                        ImportationNomFichier = value; 
+                    }
+                }                
             }
         }
 

@@ -76,14 +76,8 @@
     <Compile Include="ViewModel\PlansVM.cs" />
     <Compile Include="ViewModel\RondesVM.cs" />
     <Compile Include="ViewModel\TypesMaterielVM.cs" />
-    <Compile Include="View\AfficheMateriel.xaml.cs">
-      <DependentUpon>AfficheMateriel.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\AffichePlan.xaml.cs">
       <DependentUpon>AffichePlan.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\AfficheRondes.xaml.cs">
-      <DependentUpon>AfficheRondes.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Aide.xaml.cs">
       <DependentUpon>Aide.xaml</DependentUpon>
@@ -109,6 +103,9 @@
     <Compile Include="View\DetaillePlans.xaml.cs">
       <DependentUpon>DetaillePlans.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\DetailleRondes.xaml.cs">
+      <DependentUpon>DetailleRondes.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\DetailleTypesMateriel.xaml.cs">
       <DependentUpon>DetailleTypesMateriel.xaml</DependentUpon>
     </Compile>
@@ -122,6 +119,9 @@
       <DependentUpon>EmployeSortie.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\BaseViewModel.cs" />
+    <Compile Include="View\ImporteCodelsBarre.xaml.cs">
+      <DependentUpon>ImporteCodelsBarre.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ImportePlan.xaml.cs">
       <DependentUpon>ImportePlan.xaml</DependentUpon>
     </Compile>
@@ -156,15 +156,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\AfficheMateriel.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\AffichePlan.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\AfficheRondes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -200,6 +192,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\DetailleRondes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\DetailleTypesMateriel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -216,7 +212,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ImporteRonde.xaml">
+    <Page Include="View\ImporteCodelsBarre.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -234,9 +230,6 @@
     </Compile>
     <Compile Include="View\AfficheContenuRonde.xaml.cs">
       <DependentUpon>AfficheContenuRonde.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ImporteRonde.xaml.cs">
-      <DependentUpon>ImporteRonde.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

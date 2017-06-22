@@ -4,8 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GestionDuMateriel.View"
+             xmlns:local1="clr-namespace:GestionDuMateriel.Helpers"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <local1:ValueConvertor x:Key="ValueConvertor" />
+        <local1:MultiValueConverter x:Key="MultiValueConverter" />
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -13,19 +18,25 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="4">
-            <Label Content="Id : " />
-            <Label Content="{Binding LaPiece.Id}" />
+            <Label Margin="4">
+                <Label.Content>
+                    <TextBlock>
+                        <Run Text="Id : " />
+                        <Run Text="{Binding Path=LaPiece.Id}" />
+                    </TextBlock>
+                </Label.Content>
+            </Label>
         </StackPanel>
         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="4">
             <Label Content="Description  : " />
-            <TextBox Text="{Binding LaPiece.Description}" />
+            <TextBox Text="{Binding LaPiece.Description, Converter={StaticResource ValueConvertor}}" />
         </StackPanel>
         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="4">
             <Label Content="Plan : " />
             <ComboBox x:Name="cboTypeMateriel" ItemsSource="{Binding LesPlans}" SelectedItem="{Binding LaPiece.Plan}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Description}" />
+                        <TextBlock Text="{Binding Description, Converter={StaticResource ValueConvertor}}" />
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>

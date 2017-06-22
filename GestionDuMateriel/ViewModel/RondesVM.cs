@@ -8,6 +8,7 @@ using GestionDuMaterielDb.Model;
 using GestionDuMateriel.Helpers;
 using System.Windows.Input;
 using System.Windows;
+using System.IO;
 
 
 namespace GestionDuMateriel.ViewModel
@@ -109,7 +110,7 @@ namespace GestionDuMateriel.ViewModel
         public ICommand Ajoute { get { return new ExecutableCommand(Ajout); } }
         public void Ajout()
         {
-            AnnuleImport();    //   <<<<<<<<<<<<<<--------
+            // AnnuleImport();    //   <<<<<<<<<<<<<<--------
             Ronde nouvelleRonde = new Ronde();
             nouvelleRonde.Date = DateTime.Now;
             //
@@ -123,6 +124,11 @@ namespace GestionDuMateriel.ViewModel
             _selection = nouvelleRonde; // met à jour la sélection 
             FirePropertyChanged("LesRondes");
             FirePropertyChanged("LaRonde");
+        }
+
+        public ICommand MajSelection { get { return new ExecutableCommand(MiseAJourSelection); } }
+        public void MiseAJourSelection()
+        {
         }
 
         public ICommand Enregistre { get { return new ExecutableCommand(Enregistrement); } }

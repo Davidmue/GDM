@@ -9,6 +9,7 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <local1:ValueConvertor x:Key="ValueConvertor" />
+        <local1:MultiValueConverter x:Key="MultiValueConverter" />
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -34,7 +35,14 @@
                   SelectedItem="{Binding LeMeuble.Piece}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Description, Converter={StaticResource ValueConvertor}}"/>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding Converter="{StaticResource MultiValueConverter}">
+                                <Binding Path="Plan.Description" />
+                                <Binding Path="Description" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
