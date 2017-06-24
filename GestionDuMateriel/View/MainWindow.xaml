@@ -33,6 +33,7 @@
             <Button Name="btnTypes" Content="Types matériel" Click="btnTypes_Click" />
             <Button Name="btnMateriels" Content="Matériels" Click="btnMateriels_Click" />
             <Button Name="btnRondes" Content="Rondes" Click="btnRondes_Click" />
+            <Button Name="btnCodesBarre" Content="Codes-barre" Click="btnCodesBarre_Click" />
             <Button Name="btnOptions" Content="Options" Click="btnOptions_Click" />
             <Button Name="btnApropos" Content="À propos" Click="btnApropos_Click" />
             <Button Name="btnAide" Content="Aide" Click="btnAide_Click" />

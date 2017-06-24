@@ -22,7 +22,8 @@ namespace GestionDuMateriel
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        //
+        
         private PlansVM _plansVM; 
         private DetaillePlans _detaillePlans;
         private PiecesVM _piecesVM; 
@@ -33,15 +34,18 @@ namespace GestionDuMateriel
         private DetailleEmployes _detailleEmployes;
         private TypesMaterielVM _typesMaterielVM;
         private DetailleTypesMateriel _detailleTypesMateriel;
-        private MaterielsVM _materiels;
+        private MaterielsVM _materielsVM;
         private DetailleMateriels _detailleMateriels;
-        private RondesVM _rondes;
+        private RondesVM _rondesVM;
+        private CodesBarreVM _codesBarreVM;
+        private DetailleCodesBarre _detailleCodesBarre;
         private DetailleRondes _detailleRondes;
-        private Options _options;
-
+        private PresencesVM _presencesVM;
         //
+        private Options _options;
         private Aide _aide;
         private Apropos _aPropos;
+        //
 
         public MainWindow()
         {
@@ -59,10 +63,15 @@ namespace GestionDuMateriel
             _detailleMeubles = new DetailleMeubles(_meublesVM);
             _typesMaterielVM = new TypesMaterielVM();
             _detailleTypesMateriel = new DetailleTypesMateriel(_typesMaterielVM);
-            _materiels = new MaterielsVM(_typesMaterielVM);
-            _detailleMateriels = new DetailleMateriels(_materiels);
-            _rondes = new RondesVM();
-            _detailleRondes = new DetailleRondes(_rondes);
+            _materielsVM = new MaterielsVM(_typesMaterielVM);
+            _detailleMateriels = new DetailleMateriels(_materielsVM);
+            _rondesVM = new RondesVM();
+            //_codesBarreVM = new CodesBarreVM(_rondesVM);
+            _detailleCodesBarre = new DetailleCodesBarre();
+            // _detailleCodesBarre = new DetailleCodesBarre(_codesBarreVM);
+            // _presencesVM = new PresencesVM(_rondesVM, _materielsVM, _meublesVM, _codesBarreVM); 
+            //
+            // _detailleRondes = new DetailleRondes(_presencesVM);
             //
             _aPropos = new Apropos();
             _aide = new Aide();
@@ -72,15 +81,17 @@ namespace GestionDuMateriel
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            // rien à faire pour _aide et _aPropos _options pour le moment ... 
             // supprime les objets dans l'ordre inverse de création ... 
-            _detailleRondes.ClosingParentWindow();
+
+            // _detailleRondes.ClosingParentWindow();
+            _detailleCodesBarre.ClosingParentWindow();
             _detailleMateriels.ClosingParentWindow();
             _detailleTypesMateriel.ClosingParentWindow();
             _detailleMeubles.ClosingParentWindow();
+            _detailleEmployes.ClosingParentWindow();
             _detaillePieces.ClosingParentWindow();
             _detaillePlans.ClosingParentWindow();
-            _detailleEmployes.ClosingParentWindow();
-            // rien à faire pour _aide et _aPropos _options pour le moment ... 
         }
 
         private void QuitAppMenuItem_Click(object sender, RoutedEventArgs e)
@@ -150,5 +161,10 @@ namespace GestionDuMateriel
             spaContent.Children.Add(_options);
         }
 
+        private void btnCodesBarre_Click(object sender, RoutedEventArgs e)
+        {
+            spaContent.Children.Clear();
+            spaContent.Children.Add(_detailleCodesBarre);
+        }
     }
 }

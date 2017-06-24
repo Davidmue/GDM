@@ -18,8 +18,7 @@ namespace GestionDuMateriel.ViewModel
         private ObservableCollection<Ronde> _rondes;
         private Ronde _selection;
 
-        private bool _annulationImportEnCours = false; 
-
+        // constructeur sans argument - ok
         public RondesVM()
         {
             //
@@ -56,42 +55,15 @@ namespace GestionDuMateriel.ViewModel
             {
                 if(!(_selection == value))
                 {
-                    if(!(_annulationImportEnCours))
-                    {
-                        AnnuleImport();
-                    }
+//
                     _selection = value;
                     FirePropertyChanged("LaRonde");
                 }
             }
         }
 
-        public Visibility AnnulerImportVisibility
-        {
-            get
-            {
-                Visibility result; 
-                if(_selection == null)
-                {
-                    result = Visibility.Collapsed;
-                }
-                else
-                {
-                    if(_selection.ImportationFaite)
-                    {
-                        result = Visibility.Collapsed; 
-                    }
-                    else
-                    {
-                        result = Visibility.Visible; 
-                    }
-                }
-                return result;
-            }
-        }
-
-        public ICommand Supprime { get { return new ExecutableCommand(Suppression); } }
-        public void Suppression()
+        // public ICommand Supprime { get { return new ExecutableCommand(Suppression); } }
+        public void SuppressionSelection()
         {
             if (!(_selection == null))
             {
@@ -106,9 +78,8 @@ namespace GestionDuMateriel.ViewModel
             }
         }
 
-
-        public ICommand Ajoute { get { return new ExecutableCommand(Ajout); } }
-        public void Ajout()
+        // public ICommand NouvelleRonde { get { return new ExecutableCommand(Ajout); } }
+        public void AjoutNouvelleRonde()
         {
             // AnnuleImport();    //   <<<<<<<<<<<<<<--------
             Ronde nouvelleRonde = new Ronde();
@@ -121,42 +92,20 @@ namespace GestionDuMateriel.ViewModel
             App.Entities().SaveChanges();
             // applique la suppression aux objets représentant les données ... 
             LesRondes.Add(nouvelleRonde);
-            _selection = nouvelleRonde; // met à jour la sélection 
+            LaRonde = nouvelleRonde; // met à jour la sélection 
             FirePropertyChanged("LesRondes");
             FirePropertyChanged("LaRonde");
         }
 
-        public ICommand MajSelection { get { return new ExecutableCommand(MiseAJourSelection); } }
-        public void MiseAJourSelection()
-        {
-        }
+        //public ICommand MajSelection { get { return new ExecutableCommand(MiseAJourSelection); } }
+        //public void MiseAJourSelection()
+        //{
+        //}
 
-        public ICommand Enregistre { get { return new ExecutableCommand(Enregistrement); } }
+        //public ICommand Enregistre { get { return new ExecutableCommand(Enregistrement); } }
         public void Enregistrement()
         {
             App.Entities().SaveChanges();
-        }
-
-        public ICommand NouvelleImportation { get { return new ExecutableCommand(DemarreImport); } }
-        public void DemarreImport()
-        {
-            Ajout();
-            FirePropertyChanged("AnnulerImportVisibility");
-        }
-
-        public ICommand AnnulationImportation { get { return new ExecutableCommand(AnnuleImport); } }
-        public void AnnuleImport()
-        {
-            if(!(_selection == null))
-            {
-                if(!(_selection.ImportationFaite))
-                {
-                    _annulationImportEnCours = true; 
-                    Suppression();
-                    _annulationImportEnCours = false; 
-                    FirePropertyChanged("AnnulerImportVisibility");
-                }
-            }
         }
 
     }

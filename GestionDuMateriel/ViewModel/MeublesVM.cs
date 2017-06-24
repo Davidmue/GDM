@@ -18,8 +18,11 @@ namespace GestionDuMateriel.ViewModel
         private PiecesVM _piecesVmDependance;
         private EmployesVM _employesVmDependance;
 
+        private List<Meuble> _resultatDeRechercheAvecBarreCode;
+
         public MeublesVM(PiecesVM PiecesVmDependance, EmployesVM EmployesVmDependance)
         {
+            _resultatDeRechercheAvecBarreCode = new List<Meuble>(); 
             //
             // Meuble utilise Piece et Employe ... 
             _piecesVmDependance = PiecesVmDependance;
@@ -75,6 +78,22 @@ namespace GestionDuMateriel.ViewModel
             {
                 _selection = value;
                 FirePropertyChanged("LeMeuble");
+            }
+        }
+
+        public void RechercheAvecBarreCode(string CodeBarre)
+        {
+            _resultatDeRechercheAvecBarreCode = new List<Meuble>(LesMeubles.Where(m => m.CodeBarre.Trim() == CodeBarre.Trim()));
+        }
+        public Meuble ResultatDeRechercheAvecBarreCode()
+        {
+            if(_resultatDeRechercheAvecBarreCode.Count == 0)
+            {
+                return null; 
+            }
+            else
+            {
+                return _resultatDeRechercheAvecBarreCode[0]; 
             }
         }
 

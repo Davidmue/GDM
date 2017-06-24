@@ -23,15 +23,17 @@ namespace GestionDuMateriel.View
     public partial class ImporteCodelsBarre : Window
     {
         private bool _dialogueSeraFerme;
+        private PresencesVM _presenceVM;
 
         // constructeurs ... 
         private ImporteCodelsBarre()
         {
             InitializeComponent();
         }
-        public ImporteCodelsBarre(RondesVM rondeVM) : this()
+        public ImporteCodelsBarre(PresencesVM presenceVM) : this()
         {
-            DataContext = rondeVM;
+            DataContext = presenceVM;
+            _presenceVM = presenceVM; 
             _dialogueSeraFerme = false;
         }
 
@@ -56,31 +58,20 @@ namespace GestionDuMateriel.View
             if (openFileDialog.ShowDialog() == true)
             {
                 string cheminComplet = openFileDialog.FileName;
-                tbxCheminFichier.Focus(); 
+                tbxCheminFichier.Focus(); // pour que les bindings fonctionnent, il faut sélectionner le contrôle ! 
                 tbxCheminFichier.Text = cheminComplet;
-                btnChoisiFichier.Focus();  
-
-                //tbxFile.Text = System.IO.Path.GetFileName(cheminComplet);
-                //tbxFolder.Text = System.IO.Path.GetDirectoryName(cheminComplet);
-
-
-//                (DataContext as RondesVM).LaRonde.ImportationCheminDossierSource = System.IO.Path.GetDirectoryName(cheminComplet);
-//                (DataContext as RondesVM).LaRonde.ImportationNomFichier = System.IO.Path.GetFileName(cheminComplet);
-                // tbxCheminFichier.Text = (DataContext as RondesVM).LaRonde.ImportationCheminCompletFichier; 
+                btnChoisiFichier.Focus();  // retour sélection
             }
-            // btnMettreAJour.Command.Execute(null); 
         }
 
         private void btnAnnuler_Click(object sender, RoutedEventArgs e)
         {
-
             this.Hide();
         }
 
         private void btnImporter_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show((DataContext as RondesVM).LaRonde.ImportationNomFichier);
-            MessageBox.Show((DataContext as RondesVM).LaRonde.ImportationCheminDossierSource);
+            btnDemarreProcedureImport.Command.Execute(null);
             this.Hide();
         }
     }

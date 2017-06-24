@@ -18,33 +18,13 @@ namespace GestionDuMateriel.ViewModel
 
         private RondesVM _rondesVmDependance; 
 
-        public CodesBarreVM(RondesVM RondesVmDependance)
+        // constructeur OK - un code-barre a été scanné lors de la ronde en cours ... 
+        public CodesBarreVM()
         {
+            // RondesVM RondesVmDependance
+            // _rondesVmDependance = RondesVmDependance;
             //
-            _rondesVmDependance = RondesVmDependance;
-            //
-            // selection pour la ronde sélectionnée ... 
-            Ronde rondeSelectionnee; 
-            if (_rondesVmDependance.LaRonde == null)
-            {
-                if(_rondesVmDependance.LesRondes.Count == 0)
-                {
-                    _rondesVmDependance.Ajout();
-                    rondeSelectionnee = _rondesVmDependance.LaRonde;
-                }
-                else
-                {
-                    rondeSelectionnee = _rondesVmDependance.LesRondes[0];
-                }
-            }
-            else
-            {
-                rondeSelectionnee = _rondesVmDependance.LaRonde; 
-            }
-            int rondeId = rondeSelectionnee.Id;
-            ObservableCollection<CodeBarre> tousLesCodesBarre = new ObservableCollection<CodeBarre>(App.Entities().CodeBarres);
-            ObservableCollection<CodeBarre> _codesbarre = new ObservableCollection<CodeBarre>(tousLesCodesBarre.Where(x => x.RondeId == rondeId));
-            // ... autres collections si nécessaire
+            ObservableCollection<CodeBarre> _codesbarre = new ObservableCollection<CodeBarre>(App.Entities().CodeBarres);
             if (_codesbarre.Count == 0)
             {
                 _selection = null;
@@ -87,7 +67,7 @@ namespace GestionDuMateriel.ViewModel
             }
         }
 
-        public ICommand Supprime { get { return new ExecutableCommand(Suppression); } }
+        // public ICommand Supprime { get { return new ExecutableCommand(Suppression); } }
         public void Suppression()
         {
             if (!(_selection == null))
@@ -104,16 +84,41 @@ namespace GestionDuMateriel.ViewModel
         }
 
 
-        public ICommand Ajoute { get { return new ExecutableCommand(Ajout); } }
+        // public ICommand Ajoute { get { return new ExecutableCommand(Ajout); } }
         public void Ajout()
         {
+
+            int i = _codesbarre.Count;
+
+            ////
+            //// selection pour la ronde sélectionnée ... 
+            //Ronde rondeSelectionnee;
+            //if (_rondesVmDependance.LaRonde == null)
+            //{
+            //    if (_rondesVmDependance.LesRondes.Count == 0)
+            //    {
+            //        _rondesVmDependance.AjoutNouvelleRonde();
+            //        rondeSelectionnee = _rondesVmDependance.LaRonde;
+            //    }
+            //    else
+            //    {
+            //        rondeSelectionnee = _rondesVmDependance.LesRondes[0];
+            //    }
+            //}
+            //else
+            //{
+            //    rondeSelectionnee = _rondesVmDependance.LaRonde;
+            //}
+            //int rondeId = rondeSelectionnee.Id;
+
+
             CodeBarre nouveauCodeBarre = new CodeBarre();
             nouveauCodeBarre.Ignore = true;
             nouveauCodeBarre.Interpretation = "Pas de correspondance trouvée ! ";
             nouveauCodeBarre.NoDeSerie = "";
             if(_rondesVmDependance.LesRondes.Count == 0)
             {
-                _rondesVmDependance.Ajout(); 
+                _rondesVmDependance.AjoutNouvelleRonde(); 
             }
             if(_rondesVmDependance.LaRonde == null)
             {
@@ -129,7 +134,7 @@ namespace GestionDuMateriel.ViewModel
             App.Entities().CodeBarres.Add(nouveauCodeBarre);
             App.Entities().SaveChanges();
             // applique la suppression aux objets représentant les données ... 
-            _codesbarre.Add(nouveauCodeBarre);
+            _codesbarre.Add(nouveauCodeBarre);                                   // buggy  :-(
             _selection = nouveauCodeBarre; // met à jour la sélection 
             FirePropertyChanged("LesCodesBarre");
             FirePropertyChanged("LeCodeBarre");

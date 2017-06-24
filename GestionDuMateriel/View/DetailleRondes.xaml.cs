@@ -28,9 +28,12 @@ namespace GestionDuMateriel.View
         {
             InitializeComponent();
         }
-        public DetailleRondes(RondesVM rondesVM) : this()
+
+        // ici
+
+        public DetailleRondes(PresencesVM PresencesVMDependance) : this()
         {
-            DataContext = rondesVM;
+            DataContext = PresencesVMDependance;
         }
 
         public void ClosingParentWindow()
@@ -44,7 +47,7 @@ namespace GestionDuMateriel.View
         private void btnImporterScans_Click(object sender, RoutedEventArgs e)
         {
             btnNouvelleRonde.Command.Execute(null);
-            _dlgImportCodesBarre = new ImporteCodelsBarre((DataContext as RondesVM));
+            _dlgImportCodesBarre = new ImporteCodelsBarre((DataContext as PresencesVM));
             _dlgImportCodesBarre.ShowDialog();
             //
             // do the job ...
@@ -52,7 +55,8 @@ namespace GestionDuMateriel.View
             _dlgImportCodesBarre.DialogueSeraFerme = true;
             _dlgImportCodesBarre.Close(); // la boîte de dialogue est fermée en même temps que 
             //
-            btnAnnulerLImporte.Command.Execute(null); 
+            btnAnnulerLImporte.Command.Execute(null);
+            dagRondes.Items.Refresh(); 
         }
 
         // SelectionChanged="dagTypeMateriel_SelectionChanged"

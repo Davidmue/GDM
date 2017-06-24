@@ -74,6 +74,7 @@
     <Compile Include="ViewModel\MeublesVM.cs" />
     <Compile Include="ViewModel\PiecesVM.cs" />
     <Compile Include="ViewModel\PlansVM.cs" />
+    <Compile Include="ViewModel\PresencesVM.cs" />
     <Compile Include="ViewModel\RondesVM.cs" />
     <Compile Include="ViewModel\TypesMaterielVM.cs" />
     <Compile Include="View\AffichePlan.xaml.cs">
@@ -84,6 +85,9 @@
     </Compile>
     <Compile Include="View\Apropos.xaml.cs">
       <DependentUpon>Apropos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DetailleCodesBarre.xaml.cs">
+      <DependentUpon>DetailleCodesBarre.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DetailleCodesBarreSelonRonde.xaml.cs">
       <DependentUpon>DetailleCodesBarreSelonRonde.xaml</DependentUpon>
@@ -149,6 +153,9 @@
     <Compile Include="View\Recherche.xaml.cs">
       <DependentUpon>Recherche.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\TestWindow.xaml.cs">
+      <DependentUpon>TestWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\TypeMaterielDetail.xaml.cs">
       <DependentUpon>TypeMaterielDetail.xaml</DependentUpon>
     </Compile>
@@ -165,6 +172,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Apropos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DetailleCodesBarre.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -264,6 +275,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Recherche.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TestWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -17,8 +17,11 @@ namespace GestionDuMateriel.ViewModel
         private Materiel _selection;
         private TypesMaterielVM _typesMaterielVmDependance; 
 
+        private List<Materiel> _resultatDeRechercheAvecBarreCode;
+
         public MaterielsVM(TypesMaterielVM TypesMaterielVmDependance)
         {
+            _resultatDeRechercheAvecBarreCode = new List<Materiel>();
             //
             // Materiel utilise TypeMateriel ... 
             _typesMaterielVmDependance = TypesMaterielVmDependance;
@@ -64,6 +67,22 @@ namespace GestionDuMateriel.ViewModel
             {
                 _selection = value;
                 FirePropertyChanged("LeMateriel");
+            }
+        }
+
+        public void RechercheAvecBarreCode(string CodeBarre)
+        {
+            _resultatDeRechercheAvecBarreCode = new List<Materiel>(LesMateriels.Where(m => m.CodeBarre.Trim() == CodeBarre.Trim()));
+        }
+        public Materiel ResultatDeRechercheAvecBarreCode()
+        {
+            if (_resultatDeRechercheAvecBarreCode.Count == 0)
+            {
+                return null;
+            }
+            else
+            {
+                return _resultatDeRechercheAvecBarreCode[0];
             }
         }
 

@@ -25,7 +25,7 @@
             <Bold>Rondes</Bold>
         </TextBlock>
 
-        <DataGrid Grid.Column="0" Grid.Row="1" Name="dagTypeMateriel" Margin="4" ItemsSource="{Binding LesRondes}" 
+        <DataGrid Grid.Column="0" Grid.Row="1" Name="dagRondes" Margin="4" ItemsSource="{Binding LesRondes}" 
                   SelectedItem="{Binding LaRonde}" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
@@ -40,7 +40,7 @@
             <Button Name="btnNouvelleRonde" Margin="4" ToolTip="Crée une nouvelle ronde vide" Content="Nouveau" Visibility="Collapsed" Command="{Binding NouvelleImportation}" />
             <Button Name="btnImporterScans" Margin="4" ToolTip="Importer le fichier de codes-barres" Content="Importer" Click="btnImporterScans_Click" />
             <Button Name="btnAnnulerLImporte" Margin="4" Content="Annuler" Visibility="{Binding AnnulerImportVisibility}" Command="{Binding AnnulationImportation}" />
-            <Button Name="btnEnregRondes" Margin="4" Content="Enregistrer" Visibility="Collapsed"  Command="{Binding Enregistre}" />
+            <Button Name="btnEnregRondes" Margin="4" Content="Enregistrer" Visibility="Collapsed" Command="{Binding Enregistre}" />
             <Label Content="    " />
         </StackPanel>
 
