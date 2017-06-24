@@ -35,13 +35,11 @@
                   SelectedItem="{Binding LeMeuble.Piece}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock>
-                        <TextBlock.Text>
-                            <MultiBinding Converter="{StaticResource MultiValueConverter}">
-                                <Binding Path="Plan.Description" />
-                                <Binding Path="Description" />
-                            </MultiBinding>
-                        </TextBlock.Text>
+                    <TextBlock TextWrapping="Wrap">
+                        <Run Text="{Binding Description, Converter={StaticResource ValueConvertor}}" />
+                        <Run Text="(" />
+                        <Run Text="{Binding Plan.Description, Converter={StaticResource ValueConvertor}}" />
+                        <Run Text=")" />
                     </TextBlock>
                 </DataTemplate>
             </ComboBox.ItemTemplate>

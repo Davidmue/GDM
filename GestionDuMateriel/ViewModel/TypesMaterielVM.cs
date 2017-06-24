@@ -17,7 +17,7 @@ namespace GestionDuMateriel.ViewModel
 
         public TypesMaterielVM()
         {
-            _typesMateriel = new ObservableCollection<TypeMateriel>(App.Entities().TypeMateriels);
+            _typesMateriel = new ObservableCollection<TypeMateriel>(App.Entities().TypeMateriels.OrderBy(m => m.Description));
             if (_typesMateriel.Count == 0)
             {
                 NouveauType();

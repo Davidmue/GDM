@@ -19,7 +19,7 @@ namespace GestionDuMateriel.ViewModel
 
         public PlansVM()
         {
-            _plans = new ObservableCollection<Plan>(App.Entities().Plans);
+            _plans = new ObservableCollection<Plan>(App.Entities().Plans.OrderBy(p => p.Description));
             // ... autres collections si nécessaire
             if(_plans.Count == 0)
             {

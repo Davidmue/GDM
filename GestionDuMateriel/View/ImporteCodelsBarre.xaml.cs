@@ -77,11 +77,6 @@ namespace GestionDuMateriel.View
             this.Hide();
         }
 
-        private void btnVoirContenu_Click(object sender, RoutedEventArgs e)
-        {
-            //
-        }
-
         private void btnImporter_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show((DataContext as RondesVM).LaRonde.ImportationNomFichier);

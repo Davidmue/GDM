@@ -25,7 +25,8 @@ namespace GestionDuMateriel.ViewModel
             _piecesVmDependance = PiecesVmDependance;
             _employesVmDependance = EmployesVmDependance;
             //
-            _meubles = new ObservableCollection<Meuble>(App.Entities().Meubles);
+            _meubles = new ObservableCollection<Meuble>(App.Entities().Meubles.OrderBy(m => m.Piece.Plan.Description).ThenBy(
+                    m => m.Piece.Description).ThenBy(m => m.Description));
             // ... autres collections si nécessaire
             if (_meubles.Count == 0)
             {

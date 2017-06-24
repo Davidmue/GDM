@@ -47,7 +47,6 @@
         </Grid>
         <StackPanel Grid.Row="5" Margin="4" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Margin="4" Name="btnAnnuler" Content="Annuler" Click="btnAnnuler_Click" />
-            <Button Margin="4" Name="btnVoirContenu" Content="Voir le contenu" Click="btnVoirContenu_Click" />
             <Button Margin="4" Name="btnMettreAJour" Content="Enregistrer" Command="{Binding MajSelection}" Visibility="Collapsed" />
             <Button Margin="4" Name="btnAjout" Content="Ajouter" Command="{Binding Ajoute}" Visibility="Collapsed" />
             <Button Margin="4" Name="btnImporter" Content="Importer" Click="btnImporter_Click" />

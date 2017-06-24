@@ -14,7 +14,7 @@
         <TextBlock Grid.Row="0" FontSize="20" Margin="8">
             <Bold>A propos</Bold>
         </TextBlock>
-        <TextBlock TextWrapping="Wrap" Margin="4" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBlock Grid.Row="1" TextWrapping="Wrap" Margin="4" HorizontalAlignment="Center" VerticalAlignment="Center">
             Projet .NET dans le cadre de mes études / D. Müller
         </TextBlock>
     </Grid>

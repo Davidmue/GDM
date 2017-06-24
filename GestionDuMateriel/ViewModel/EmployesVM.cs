@@ -19,7 +19,7 @@ namespace GestionDuMateriel.ViewModel
         public EmployesVM()
         {
             //
-            _employes = new ObservableCollection<Employe>(App.Entities().Employes);
+            _employes = new ObservableCollection<Employe>(App.Entities().Employes.OrderBy(e => e.Nom).ThenBy(e => e.Prenom));
             // ... autres collections si nécessaire
             if (_employes.Count == 0)
             {

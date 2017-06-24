@@ -37,6 +37,7 @@ namespace GestionDuMateriel
         private DetailleMateriels _detailleMateriels;
         private RondesVM _rondes;
         private DetailleRondes _detailleRondes;
+        private Options _options;
 
         //
         private Aide _aide;
@@ -65,6 +66,7 @@ namespace GestionDuMateriel
             //
             _aPropos = new Apropos();
             _aide = new Aide();
+            _options = new Options();
             //
         }
 
@@ -78,7 +80,7 @@ namespace GestionDuMateriel
             _detaillePieces.ClosingParentWindow();
             _detaillePlans.ClosingParentWindow();
             _detailleEmployes.ClosingParentWindow();
-            // rien à faire pour _aide et _aPropos ... 
+            // rien à faire pour _aide et _aPropos _options pour le moment ... 
         }
 
         private void QuitAppMenuItem_Click(object sender, RoutedEventArgs e)
@@ -140,6 +142,12 @@ namespace GestionDuMateriel
         {
             spaContent.Children.Clear();
             spaContent.Children.Add(_aPropos);
+        }
+
+        private void btnOptions_Click(object sender, RoutedEventArgs e)
+        {
+            spaContent.Children.Clear();
+            spaContent.Children.Add(_options);
         }
 
     }

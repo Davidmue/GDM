@@ -24,7 +24,7 @@ namespace GestionDuMateriel.ViewModel
             // Piece utilise TypePiece ... 
             _plansVMDependance = PlansVmDependance;
             //
-            _pieces = new ObservableCollection<Piece>(App.Entities().Pieces);
+            _pieces = new ObservableCollection<Piece>(App.Entities().Pieces.OrderBy(p => p.Plan.Description).ThenBy(p => p.Description));
             // ... autres collections si nécessaire
             if (_pieces.Count == 0)
             {

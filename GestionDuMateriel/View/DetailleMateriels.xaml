@@ -31,6 +31,7 @@
                   IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
+                <DataGridTextColumn Header="Description" Binding="{Binding Description, Converter={StaticResource ValueConvertor}}" />
                 <DataGridTextColumn Header="Code barre" Binding="{Binding CodeBarre, Converter={StaticResource ValueConvertor}}" />
                 <DataGridTextColumn Header="Entrée" Binding="{Binding Entree, StringFormat=dd.MM.yyyy}" />
                 <DataGridTextColumn Header="Description entrée" Binding="{Binding DescriptionEntree, Converter={StaticResource ValueConvertor}}" />

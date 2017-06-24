@@ -23,7 +23,7 @@ namespace GestionDuMateriel.ViewModel
             // Materiel utilise TypeMateriel ... 
             _typesMaterielVmDependance = TypesMaterielVmDependance;
             //
-            _materiels = new ObservableCollection<Materiel>(App.Entities().Materiels);
+            _materiels = new ObservableCollection<Materiel>(App.Entities().Materiels.OrderBy(m => m.TypeMateriel.Description).ThenBy(m => m.Description));
             // ... autres collections si nécessaire
             if (_materiels.Count == 0)
             {
