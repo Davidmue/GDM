@@ -36,5 +36,11 @@ namespace GestionDuMateriel.View
         {
             btnEnregMateriel.Command.Execute(null);
         }
+
+        private void btnAjoutMateriel_Click(object sender, RoutedEventArgs e)
+        {
+            btnAjoutMaterielInvisible.Command.Execute(null);
+            PieceDetails.tbxDescriptionPiece.Focus(); 
+        }
     }
 }

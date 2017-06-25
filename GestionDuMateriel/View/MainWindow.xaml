@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GestionDuMateriel"
         mc:Ignorable="d"
-        Title="Gestion du matériel" Height="350" Width="525" Closing="Window_Closing">
+        Title="Gestion du matériel" Height="350" Width="525" Closing="Window_Closing" Loaded="Window_Loaded">
+    <Window.InputBindings>
+        <KeyBinding Gesture="CTRL+1" Command="{Binding AfficheDetaillePlans}" />
+    </Window.InputBindings>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100" />
@@ -18,6 +21,9 @@
         <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
             <MenuItem Header="_Application">
                 <MenuItem x:Name="QuitAppMenuItem" Header="_Quitter" Click="QuitAppMenuItem_Click"  />
+                <MenuItem Header="_Atteindre">
+                    <MenuItem x:Name="AtteindrePlansMenuItem" Header="_Plan" Click="AtteindrePlansMenuItem_Click" InputGestureText="Ctrl+1" />
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="_Édition">
                 <MenuItem Header="_Rechercher" x:Name="FindMenuItem" InputGestureText="Ctrl+F" />
@@ -39,7 +45,9 @@
             <Button Name="btnAide" Content="Aide" Click="btnAide_Click" />
         </StackPanel>
         <Grid Grid.Row="1" Grid.Column="1" x:Name="spaContent">
-            
+            <Grid.Children>
+                <ContentControl Content="{Binding Contenu}" />
+            </Grid.Children>
         </Grid>
     </Grid>
 </Window>

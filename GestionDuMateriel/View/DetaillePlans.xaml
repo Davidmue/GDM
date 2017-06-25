@@ -30,7 +30,7 @@
         </DataGrid>
         <StackPanel Grid.Row="2" x:Name="stpDownPan" Margin="4" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button x:Name="btnAfficherLePlan" Content="Afficher" Click="btnAfficherLePlan_Click" Margin="4" />
-            <Button x:Name="btnAjouterUnPlan" Content="Ajouter" Click="btnAjouterUnPlan_Click" Margin="4" />
+            <Button x:Name="btnAjouterUnPlan" Content="Importer" Click="btnAjouterUnPlan_Click" Margin="4" />
             <Button x:Name="btnSupprimerLePlan" Content="Supprimer" Margin="4" Command="{Binding Delete}" />
             <Label Content="       " />
         </StackPanel>

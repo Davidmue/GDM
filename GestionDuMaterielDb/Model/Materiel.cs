@@ -32,6 +32,8 @@ namespace GestionDuMaterielDb.Model
         public Nullable<bool> Garantie { get; set; }
         public Nullable<System.DateTime> GarantieEcheance { get; set; }
         public Nullable<decimal> PrixAchat { get; set; }
+        public Nullable<System.DateTime> DateDernierApercu { get; set; }
+        public string CommentaireDernierApercu { get; set; }
     
         public virtual TypeMateriel TypeMateriel { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

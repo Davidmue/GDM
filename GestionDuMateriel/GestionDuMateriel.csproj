@@ -70,6 +70,7 @@
     <Compile Include="ViewModel\AffichePlanVM.cs" />
     <Compile Include="ViewModel\CodesBarreVM.cs" />
     <Compile Include="ViewModel\EmployesVM.cs" />
+    <Compile Include="ViewModel\MainWindowVM.cs" />
     <Compile Include="ViewModel\MaterielsVM.cs" />
     <Compile Include="ViewModel\MeublesVM.cs" />
     <Compile Include="ViewModel\PiecesVM.cs" />

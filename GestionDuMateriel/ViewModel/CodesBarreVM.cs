@@ -7,7 +7,8 @@ using System.Collections.ObjectModel;
 using GestionDuMaterielDb.Model;
 using GestionDuMateriel.Helpers;
 using System.Windows.Input;
-
+using System.Windows;
+using System.Data.Entity.Validation;
 
 namespace GestionDuMateriel.ViewModel
 {
@@ -24,7 +25,7 @@ namespace GestionDuMateriel.ViewModel
             _rondesVmDependance = RondesVmDependance;
             //
             _codesbarre = new ObservableCollection<CodeBarre>(
-                App.Entities().CodeBarres.OrderBy(c => c.Ronde.Date).ThenBy(c => c.Id));
+                App.Entities().CodeBarres.OrderByDescending(c => c.Ronde.Date).ThenByDescending(c => c.Id));
             // sélection par défaut ... 
             if (_codesbarre.Count == 0)
             {
@@ -88,12 +89,17 @@ namespace GestionDuMateriel.ViewModel
         public ICommand Ajoute { get { return new ExecutableCommand(Ajout); } }
         public void Ajout()
         {
-            if(!(_rondesVmDependance.LesRondes.Count == 0))
+            if(_rondesVmDependance.LesRondes.Count == 0)
             {
+                MessageBox.Show("Il n'y a pas de ronde ! Créez une ronde d'abord ! ", "L'ajout du code-barre n'est pas possible", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                // Attention : pas de valeur nulle ! 
                 CodeBarre nouveauCodeBarre = new CodeBarre();
                 nouveauCodeBarre.Ignore = true;
                 nouveauCodeBarre.Interpretation = "Pas de correspondance trouvée ! ";
-                nouveauCodeBarre.NoDeSerie = "";
+                nouveauCodeBarre.NoDeSerie = "(vide)";
                 Ronde ronde;
                 if (_rondesVmDependance.LaRonde == null)
                 {
@@ -108,7 +114,28 @@ namespace GestionDuMateriel.ViewModel
                 // nouveauCodeBarre.Id = -1;   // Entity gère ceci ! 
                 //
                 App.Entities().CodeBarres.Add(nouveauCodeBarre);
-                App.Entities().SaveChanges();
+                //
+                // merci : https://developpeurinfo.wordpress.com/2014/09/30/echec-de-la-validation-dune-ou-de-plusieurs-entites-pour-plus-dinformations-consultez-entityvalidationerrors/
+                string toto = "";
+                try
+                {
+                    // mon code qui plante
+                    App.Entities().SaveChanges();
+                }
+                catch (DbEntityValidationException e)
+                {
+                    foreach (var eve in e.EntityValidationErrors)
+                    {
+                        toto += "Entity of type \"" + eve.Entry.Entity.GetType().Name + "\" in state \"" + eve.Entry.State + "\" has the following validation errors:";
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            toto += "- Property: \""+ve.PropertyName+"\", Error: \""+ve.ErrorMessage+"\"";
+                        }
+                    }
+                    MessageBox.Show(toto); 
+                    throw new Exception("Arghh.."); 
+                }
+                //
                 // applique la suppression aux objets représentant les données ... 
                 LesCodesBarre.Add(nouveauCodeBarre);                                   // buggy  :-(
                 _selection = nouveauCodeBarre; // met à jour la sélection 

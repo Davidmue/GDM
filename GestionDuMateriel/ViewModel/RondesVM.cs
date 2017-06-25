@@ -91,8 +91,8 @@ namespace GestionDuMateriel.ViewModel
             App.Entities().Rondes.Add(nouvelleRonde);
             App.Entities().SaveChanges();
             // applique la suppression aux objets représentant les données ... 
-            LesRondes.Add(nouvelleRonde);
-            LaRonde = nouvelleRonde; // met à jour la sélection 
+            _rondes.Add(nouvelleRonde);
+            _selection = nouvelleRonde; // met à jour la sélection 
             FirePropertyChanged("LesRondes");
             FirePropertyChanged("LaRonde");
         }

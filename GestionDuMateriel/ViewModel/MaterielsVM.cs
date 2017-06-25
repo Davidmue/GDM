@@ -70,6 +70,25 @@ namespace GestionDuMateriel.ViewModel
             }
         }
 
+        //public Nullable<DateTime> DernierApercu
+        //{
+        //    get
+        //    {
+        //        Nullable<DateTime> result; 
+        //        List<PresenceMateriel> presences = new List<PresenceMateriel>( LeMateriel.PresenceMateriels.Where(m => m.MaterielId == LeMateriel.Id) );
+        //        if(presences.Count == 0)
+        //        {
+        //            result = null; 
+        //        }
+        //        else
+        //        {
+        //            PresenceMateriel presence = presences.OrderByDescending(p => p.Ronde.Date).First();
+        //            result = presence.Ronde.Date;
+        //        }
+        //        return result; 
+        //    }
+        //}
+
         public void RechercheAvecBarreCode(string CodeBarre)
         {
             _resultatDeRechercheAvecBarreCode = new List<Materiel>(LesMateriels.Where(m => m.CodeBarre.Trim() == CodeBarre.Trim()));

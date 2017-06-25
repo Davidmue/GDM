@@ -46,7 +46,9 @@ namespace GestionDuMateriel.View
 
         private void btnImporterScans_Click(object sender, RoutedEventArgs e)
         {
+
             btnNouvelleRonde.Command.Execute(null);
+
             _dlgImportCodesBarre = new ImporteCodelsBarre((DataContext as PresencesVM));
             _dlgImportCodesBarre.ShowDialog();
             //

@@ -30,7 +30,7 @@
                 <DataGridTextColumn Header="Numéro de série" Binding="{Binding NoDeSerie, Converter={StaticResource ValueConvertor}}" />
                 <DataGridCheckBoxColumn Header="Ignore" Binding="{Binding Ignore}" />
                 <DataGridTextColumn Header="Date de la ronde" Binding="{Binding Ronde.Date , StringFormat=dd.MM.yyyy}" />
-                <DataGridTextColumn Header="Date de l'import" Binding="{Binding Ronde.DateImport , StringFormat=dd.MM.yyyy}" />
+                <DataGridTextColumn Header="Date de l'import" Binding="{Binding Ronde.ImportationDate , StringFormat=dd.MM.yyyy}" />
                 <DataGridTextColumn Header="Interprétation" Binding="{Binding Interpretation, Converter={StaticResource ValueConvertor}}" />
             </DataGrid.Columns>
         </DataGrid>

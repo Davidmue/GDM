@@ -23,14 +23,15 @@ namespace GestionDuMateriel
     public partial class MainWindow : Window
     {
         //
-        
-        private PlansVM _plansVM; 
+        private MainWindowVM _mainWindowWM;
+        //
+        private PlansVM _plansVM;
         private DetaillePlans _detaillePlans;
-        private PiecesVM _piecesVM; 
+        private PiecesVM _piecesVM;
         private DetaillePieces _detaillePieces;
         private MeublesVM _meublesVM;
         private DetailleMeubles _detailleMeubles;
-        private EmployesVM _employesVM; 
+        private EmployesVM _employesVM;
         private DetailleEmployes _detailleEmployes;
         private TypesMaterielVM _typesMaterielVM;
         private DetailleTypesMateriel _detailleTypesMateriel;
@@ -50,11 +51,13 @@ namespace GestionDuMateriel
         public MainWindow()
         {
             InitializeComponent();
+            _mainWindowWM = new MainWindowVM(); 
             //
             // création des objets nécessaires qui restent toujours en mémoire ... 
             // création des sous-fenêtres ...
             _plansVM = new PlansVM();
             _detaillePlans = new DetaillePlans(_plansVM);
+            _mainWindowWM.AjoutDuContenuPlan(_detaillePlans);
             _piecesVM = new PiecesVM(_plansVM);
             _detaillePieces = new DetaillePieces(_piecesVM);
             _employesVM = new EmployesVM();
@@ -68,13 +71,19 @@ namespace GestionDuMateriel
             _rondesVM = new RondesVM();
             _codesBarreVM = new CodesBarreVM(_rondesVM);
             _detailleCodesBarre = new DetailleCodesBarre(_codesBarreVM);
-            _presencesVM = new PresencesVM(_rondesVM, _materielsVM, _meublesVM, _codesBarreVM); 
+            _presencesVM = new PresencesVM(_rondesVM, _materielsVM, _meublesVM, _codesBarreVM);
             _detailleRondes = new DetailleRondes(_presencesVM);
             //
             _aPropos = new Apropos();
             _aide = new Aide();
             _options = new Options();
             //
+            DataContext = _mainWindowWM; 
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            // AfficheDetailleAide();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -92,15 +101,20 @@ namespace GestionDuMateriel
             _detaillePlans.ClosingParentWindow();
         }
 
+        // events du menu ... 
         private void QuitAppMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            Close(); 
+            Close();
         }
+        private void AtteindrePlansMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            AfficheDetaillePlans();
+        }
+
 
         private void btnPlans_Click(object sender, RoutedEventArgs e)
         {
-            spaContent.Children.Clear();
-            spaContent.Children.Add(_detaillePlans);
+            AfficheDetaillePlans();
         }
 
         private void btnPieces_Click(object sender, RoutedEventArgs e)
@@ -143,8 +157,7 @@ namespace GestionDuMateriel
 
         private void btnAide_Click(object sender, RoutedEventArgs e)
         {
-            spaContent.Children.Clear();
-            spaContent.Children.Add(_aide);
+            AfficheDetailleAide();
         }
 
         private void btnApropos_Click(object sender, RoutedEventArgs e)
@@ -164,5 +177,18 @@ namespace GestionDuMateriel
             spaContent.Children.Clear();
             spaContent.Children.Add(_detailleCodesBarre);
         }
+
+        private void AfficheDetailleAide()
+        {
+            spaContent.Children.Clear();
+            spaContent.Children.Add(_aide);
+        }
+
+        private void AfficheDetaillePlans()
+        {
+            spaContent.Children.Clear();
+            spaContent.Children.Add(_detaillePlans);
+        }
+
     }
 }

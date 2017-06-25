@@ -43,7 +43,8 @@
             <local:PieceDetail x:Name="PieceDetails" Grid.Column="0" Grid.Row="1" Width="Auto" />
         </Grid>
         <StackPanel Grid.Row="2" x:Name="stpDownPan" Margin="4" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button x:Name="btnAjoutMateriel" Command="{Binding Ajoute}" Content="Ajouter" Margin="4" />
+            <Button x:Name="btnAjoutMateriel" Content="Ajouter" Margin="4" Click="btnAjoutMateriel_Click"  />
+            <Button x:Name="btnAjoutMaterielInvisible" Command="{Binding Ajoute}" Content="Ajouter (invisible)" Margin="4" Visibility="Collapsed" />
             <Button x:Name="btnSupprMateriel" Command="{Binding Supprime}" Content="Supprimer" Margin="4" />
             <Button x:Name="btnEnregMateriel" Command="{Binding Enregistre}" Content="Enregistrer" Margin="4" Visibility="Collapsed" />
             <Label Content="       " />

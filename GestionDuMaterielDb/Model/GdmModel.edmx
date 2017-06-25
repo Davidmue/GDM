@@ -43,6 +43,8 @@
           <Property Name="Garantie" Type="bit" />
           <Property Name="GarantieEcheance" Type="datetime" />
           <Property Name="PrixAchat" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="DateDernierApercu" Type="datetime" />
+          <Property Name="CommentaireDernierApercu" Type="nchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Meuble">
           <Key>
@@ -382,6 +384,8 @@
           <Property Name="PrixAchat" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="TypeMateriel" Relationship="GestionDuMaterielModel.FK_Materiel_TypeMateriel" FromRole="Materiel" ToRole="TypeMateriel" />
           <NavigationProperty Name="PresenceMateriels" Relationship="GestionDuMaterielModel.FK_PresenceMateriel_Materiel" FromRole="Materiel" ToRole="PresenceMateriel" />
+          <Property Name="DateDernierApercu" Type="DateTime" Precision="3" />
+          <Property Name="CommentaireDernierApercu" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="PresenceMateriel">
           <Key>
@@ -575,6 +579,8 @@
           <EntitySetMapping Name="Materiels">
             <EntityTypeMapping TypeName="GestionDuMaterielModel.Materiel">
               <MappingFragment StoreEntitySet="Materiel">
+                <ScalarProperty Name="CommentaireDernierApercu" ColumnName="CommentaireDernierApercu" />
+                <ScalarProperty Name="DateDernierApercu" ColumnName="DateDernierApercu" />
                 <ScalarProperty Name="PrixAchat" ColumnName="PrixAchat" />
                 <ScalarProperty Name="GarantieEcheance" ColumnName="GarantieEcheance" />
                 <ScalarProperty Name="Garantie" ColumnName="Garantie" />

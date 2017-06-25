@@ -60,14 +60,21 @@ namespace GestionDuMateriel.ViewModel
         {
             if (!(Selection == null))
             {
-                // applique la suppression à la base de données ... 
-                App.Entities().Plans.Remove(Selection); 
-                App.Entities().SaveChanges(); 
-                // applique la suppression aux objets représentant les données ... 
-                Plans.Remove(Selection);
-                _selection = null;
-                FirePropertyChanged("Selection");
-                FirePropertyChanged("Plans");
+                if(Selection.Pieces.Count == 0)
+                {
+                    // applique la suppression à la base de données ... 
+                    App.Entities().Plans.Remove(Selection);
+                    App.Entities().SaveChanges();
+                    // applique la suppression aux objets représentant les données ... 
+                    Plans.Remove(Selection);
+                    _selection = null;
+                    FirePropertyChanged("Selection");
+                    FirePropertyChanged("Plans");
+                }
+                else
+                {
+                    MessageBox.Show("Le plan est encore lié à une ou plusieurs pièces. ", "Suppression impossible", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 

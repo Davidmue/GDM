@@ -161,12 +161,19 @@ namespace GestionDuMateriel.ViewModel
             }
         }
 
-        public void AjoutNouveauCodeBarre(bool bIgnore, string sInterpretation, string sCodeBarre)
+        public void AjoutNouveauCodeBarre(bool bIgnore, string sInterpretation, string sCodeBarre, Ronde ronde)
         {
-            _codesBarreVMDependance.Ajout();
-            _codesBarreVMDependance.LeCodeBarre.Ignore = bIgnore;
-            _codesBarreVMDependance.LeCodeBarre.Interpretation = sInterpretation;
-            _codesBarreVMDependance.LeCodeBarre.NoDeSerie = sCodeBarre;
+            if (ronde == LaRonde)
+            {
+                _codesBarreVMDependance.Ajout();
+                _codesBarreVMDependance.LeCodeBarre.Ignore = bIgnore;
+                _codesBarreVMDependance.LeCodeBarre.Interpretation = sInterpretation;
+                _codesBarreVMDependance.LeCodeBarre.NoDeSerie = sCodeBarre;
+            }
+            else
+            {
+                throw new Exception("Erreur dans AjoutNouveauCodeBarre. La ronde voulue n'est pas sélectionnée. "); 
+            }
         }
 
         public void AjoutPresence(Ronde LaRonde, Meuble LeMobilier, Materiel LeMaterielPresent)
@@ -197,6 +204,8 @@ namespace GestionDuMateriel.ViewModel
         public void DemarreImport()
         {
             AjoutNouvelleRonde();
+
+
             FirePropertyChanged("AnnulerImportVisibility");
         }
 
@@ -253,6 +262,7 @@ namespace GestionDuMateriel.ViewModel
             }
         }
 
+        // la fonctionnalité de l'application ==>> l'importation ...
         public ICommand DemarreProcedureImport { get { return new ExecutableCommand(ProcedureImportation); } }
         public void ProcedureImportation()
         {
@@ -262,31 +272,36 @@ namespace GestionDuMateriel.ViewModel
                 LaRonde.ImportationDate = DateTime.Now; // importation faite = true  :-) 
                 FirePropertyChanged("LaRonde");
                 StreamReader sr = new StreamReader(LaRonde.ImportationCheminCompletFichier);
-                string contenuLigne, codeBarre, interpretation;
+                string contenuLigne, codeBarre, interpretation, emplacement;
                 // LaRonde est déjà connue ...
                 Meuble meuble = null;
                 Materiel materiel = null; 
                 int len;
                 bool ignore;
+                emplacement = "emplacement où vous avez scanné ! Mobilier à inventorier ? "; 
                 while (!(sr.EndOfStream))
                 {
                     contenuLigne = sr.ReadLine();
-                    interpretation = "Code-barre non-reconnu ! ";
+                    interpretation = "pas interprété !";
                     ignore = true; 
                     len = const_vide;
                     len = contenuLigne.IndexOf(' ');
-                    if (len == const_vide)
-                        len = contenuLigne.Length;
+                    if (len == const_vide) len = contenuLigne.Length;
                     codeBarre = contenuLigne.Substring(0, len);
+                    if (string.IsNullOrEmpty(codeBarre))
+                    {
+                        codeBarre = "(vide)";
+                    }
                     // check si meuble ...
                     _meublesVMDependance.RechercheAvecBarreCode(codeBarre);
                     if (!(_meublesVMDependance.ResultatDeRechercheAvecBarreCode() == null))
                     {
                         meuble = _meublesVMDependance.ResultatDeRechercheAvecBarreCode();
+                        emplacement = meuble.Description.Trim() + ", pièce " + meuble.Piece.Description.Trim() +
+                            " (" + meuble.Piece.Plan.Description.Trim() + (meuble.Employe == null ? "" : " / " +
+                            meuble.Employe.Description.Trim()) + ")";
                         ignore = false;
-                        interpretation = "Scan des objets dans/sur meuble " + meuble.Description.Trim() + 
-                            ", pièce " + meuble.Piece.Description.Trim() + " (" + meuble.Piece.Plan.Description.Trim() + ")";
-
+                        interpretation = "Scan des objets dans/sur meuble " + emplacement;
                     }
                     else
                     {
@@ -297,19 +312,20 @@ namespace GestionDuMateriel.ViewModel
                             if (!(meuble == null))
                             {
                                 ignore = false;
-                                
                                 interpretation = "Materiel " + materiel.Description.Trim() +
-                                    " vu le " + LaRonde.Date.ToString("dddd d MMMM yyyy") + (meuble.EstVacant ? "" : " (" + meuble.Employe.Description.Trim() + ")");
-
+                                    " vu le " + LaRonde.Date.ToString("dddd d MMMM yyyy") + " (" + emplacement + ")";
                                 AjoutPresence(LaRonde, meuble, materiel);
+                                materiel.DateDernierApercu = LaRonde.Date;
+                                materiel.CommentaireDernierApercu = interpretation;
                             }
                         }
+                        else
+                        {
+                            interpretation = "Code-barre non-reconnu ! Matériel à inventorier ? (" + emplacement + ")";
+                        }
                     }
-
-                    AjoutNouveauCodeBarre(ignore, interpretation, codeBarre);
-                    MessageBox.Show(interpretation, ignore ? "ignore" : "pris en compte");
-
-
+                    AjoutNouveauCodeBarre(ignore, interpretation, codeBarre, LaRonde);
+                    //MessageBox.Show(interpretation, ignore ? "ignore" : "pris en compte");
                 }
             }
             else
