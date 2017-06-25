@@ -12,8 +12,7 @@ using System.Windows.Input;
 namespace GestionDuMateriel.ViewModel
 {
     public class PiecesVM : BaseViewModel
-    {
-
+    { 
         private ObservableCollection<Piece> _pieces;
         private Piece _selection;
         private PlansVM _plansVMDependance;
@@ -24,7 +23,8 @@ namespace GestionDuMateriel.ViewModel
             // Piece utilise TypePiece ... 
             _plansVMDependance = PlansVmDependance;
             //
-            _pieces = new ObservableCollection<Piece>(App.Entities().Pieces.OrderBy(p => p.Plan.Description).ThenBy(p => p.Description));
+            _pieces = new ObservableCollection<Piece>(
+                App.Entities().Pieces.OrderBy(p => p.Plan.Description).ThenBy(p => p.Description));
             // ... autres collections si nécessaire
             if (_pieces.Count == 0)
             {
@@ -36,6 +36,7 @@ namespace GestionDuMateriel.ViewModel
             }
         }
 
+        // dépendance en lecture seule
         public ObservableCollection<Plan> LesPlans
         {
             get
@@ -44,6 +45,7 @@ namespace GestionDuMateriel.ViewModel
             }
         }
 
+        // contenu géré en RW ... 
         public ObservableCollection<Piece> LesPieces
         {
             get { return _pieces; }
@@ -57,10 +59,7 @@ namespace GestionDuMateriel.ViewModel
 
         public Piece LaPiece
         {
-            get
-            {
-                return _selection;
-            }
+            get { return _selection; }
             set
             {
                 _selection = value;
@@ -68,6 +67,7 @@ namespace GestionDuMateriel.ViewModel
             }
         }
 
+        // commandes accessibles en WPF XAML ... 
         public ICommand Supprime { get { return new ExecutableCommand(Suppression); } }
         public void Suppression()
         {
@@ -84,7 +84,7 @@ namespace GestionDuMateriel.ViewModel
             }
         }
 
-
+        // Attention ! Pas d'ajout quand il n'y a aucun objet dans la table Plan ! 
         public ICommand Ajoute { get { return new ExecutableCommand(Ajout); } }
         public void Ajout()
         {

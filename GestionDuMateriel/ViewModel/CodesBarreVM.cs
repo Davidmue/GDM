@@ -15,16 +15,17 @@ namespace GestionDuMateriel.ViewModel
     {
         private ObservableCollection<CodeBarre> _codesbarre;
         private CodeBarre _selection;
-
         private RondesVM _rondesVmDependance; 
 
-        // constructeur OK - un code-barre a été scanné lors de la ronde en cours ... 
-        public CodesBarreVM()
+        public CodesBarreVM(RondesVM RondesVmDependance)
         {
-            // RondesVM RondesVmDependance
-            // _rondesVmDependance = RondesVmDependance;
+            // 
+            // CodeBarre utilise Ronde ...
+            _rondesVmDependance = RondesVmDependance;
             //
-            ObservableCollection<CodeBarre> _codesbarre = new ObservableCollection<CodeBarre>(App.Entities().CodeBarres);
+            _codesbarre = new ObservableCollection<CodeBarre>(
+                App.Entities().CodeBarres.OrderBy(c => c.Ronde.Date).ThenBy(c => c.Id));
+            // sélection par défaut ... 
             if (_codesbarre.Count == 0)
             {
                 _selection = null;
@@ -35,6 +36,16 @@ namespace GestionDuMateriel.ViewModel
             }
         }
 
+        // dépendance en lecture seule
+        public ObservableCollection<Ronde> LesRondes
+        {
+            get
+            {
+                return _rondesVmDependance.LesRondes;
+            }
+        }
+
+        // contenu géré en RW ... 
         public ObservableCollection<CodeBarre> LesCodesBarre
         {
             get { return _codesbarre; }
@@ -48,10 +59,7 @@ namespace GestionDuMateriel.ViewModel
 
         public CodeBarre LeCodeBarre
         {
-            get
-            {
-                return _selection;
-            }
+            get { return _selection; }
             set
             {
                 _selection = value;
@@ -59,15 +67,8 @@ namespace GestionDuMateriel.ViewModel
             }
         }
 
-        public Ronde LaRonde
-        {
-            get
-            {
-                return _rondesVmDependance.LaRonde;
-            }
-        }
-
-        // public ICommand Supprime { get { return new ExecutableCommand(Suppression); } }
+        // commandes accessibles en WPF XAML ... 
+        public ICommand Supprime { get { return new ExecutableCommand(Suppression); } }
         public void Suppression()
         {
             if (!(_selection == null))
@@ -76,68 +77,44 @@ namespace GestionDuMateriel.ViewModel
                 App.Entities().CodeBarres.Remove(LeCodeBarre);
                 App.Entities().SaveChanges();
                 // applique la suppression aux objets représentant les données ... 
-                _codesbarre.Remove(LeCodeBarre); // objets internes ici !
+                LesCodesBarre.Remove(LeCodeBarre); // TODO: objets internes ici ?!
                 _selection = null;
                 FirePropertyChanged("LeCodeBarre");
                 FirePropertyChanged("LesCodesBarre");
             }
         }
 
-
-        // public ICommand Ajoute { get { return new ExecutableCommand(Ajout); } }
+        // Attention ! Pas d'ajout quand il n'y a aucun objet dans la table Ronde ! 
+        public ICommand Ajoute { get { return new ExecutableCommand(Ajout); } }
         public void Ajout()
         {
-
-            int i = _codesbarre.Count;
-
-            ////
-            //// selection pour la ronde sélectionnée ... 
-            //Ronde rondeSelectionnee;
-            //if (_rondesVmDependance.LaRonde == null)
-            //{
-            //    if (_rondesVmDependance.LesRondes.Count == 0)
-            //    {
-            //        _rondesVmDependance.AjoutNouvelleRonde();
-            //        rondeSelectionnee = _rondesVmDependance.LaRonde;
-            //    }
-            //    else
-            //    {
-            //        rondeSelectionnee = _rondesVmDependance.LesRondes[0];
-            //    }
-            //}
-            //else
-            //{
-            //    rondeSelectionnee = _rondesVmDependance.LaRonde;
-            //}
-            //int rondeId = rondeSelectionnee.Id;
-
-
-            CodeBarre nouveauCodeBarre = new CodeBarre();
-            nouveauCodeBarre.Ignore = true;
-            nouveauCodeBarre.Interpretation = "Pas de correspondance trouvée ! ";
-            nouveauCodeBarre.NoDeSerie = "";
-            if(_rondesVmDependance.LesRondes.Count == 0)
+            if(!(_rondesVmDependance.LesRondes.Count == 0))
             {
-                _rondesVmDependance.AjoutNouvelleRonde(); 
+                CodeBarre nouveauCodeBarre = new CodeBarre();
+                nouveauCodeBarre.Ignore = true;
+                nouveauCodeBarre.Interpretation = "Pas de correspondance trouvée ! ";
+                nouveauCodeBarre.NoDeSerie = "";
+                Ronde ronde;
+                if (_rondesVmDependance.LaRonde == null)
+                {
+                    ronde = _rondesVmDependance.LesRondes[0];
+                }
+                else
+                {
+                    ronde = _rondesVmDependance.LaRonde;
+                }
+                nouveauCodeBarre.Ronde = ronde; 
+                //
+                // nouveauCodeBarre.Id = -1;   // Entity gère ceci ! 
+                //
+                App.Entities().CodeBarres.Add(nouveauCodeBarre);
+                App.Entities().SaveChanges();
+                // applique la suppression aux objets représentant les données ... 
+                LesCodesBarre.Add(nouveauCodeBarre);                                   // buggy  :-(
+                _selection = nouveauCodeBarre; // met à jour la sélection 
+                FirePropertyChanged("LesCodesBarre");
+                FirePropertyChanged("LeCodeBarre");
             }
-            if(_rondesVmDependance.LaRonde == null)
-            {
-                nouveauCodeBarre.Ronde = _rondesVmDependance.LesRondes[0]; 
-            }
-            else
-            {
-                nouveauCodeBarre.Ronde = _rondesVmDependance.LaRonde;
-            }
-            //
-            // nouveauCodeBarre.Id  // Entity gère ceci ! 
-            //
-            App.Entities().CodeBarres.Add(nouveauCodeBarre);
-            App.Entities().SaveChanges();
-            // applique la suppression aux objets représentant les données ... 
-            _codesbarre.Add(nouveauCodeBarre);                                   // buggy  :-(
-            _selection = nouveauCodeBarre; // met à jour la sélection 
-            FirePropertyChanged("LesCodesBarre");
-            FirePropertyChanged("LeCodeBarre");
         }
 
         public ICommand Enregistre { get { return new ExecutableCommand(Enregistrement); } }

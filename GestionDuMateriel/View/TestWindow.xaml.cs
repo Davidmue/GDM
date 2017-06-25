@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GestionDuMateriel.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,14 @@ namespace GestionDuMateriel.View
         public TestWindow()
         {
             InitializeComponent();
+            //Aide _aide = new Aide();
+            //uniqueGrid.Children.Add(_aide);
+
+            RondesVM _rondesVM = new RondesVM();
+            CodesBarreVM _codesBarreVM = new CodesBarreVM(_rondesVM);
+            uniqueGrid.Children.Add(new DetailleCodesBarre(_codesBarreVM));
+
+            //uniqueGrid.Children.Add(new DetailleCodesBarre());
         }
 
     }

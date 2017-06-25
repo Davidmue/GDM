@@ -66,12 +66,10 @@ namespace GestionDuMateriel
             _materielsVM = new MaterielsVM(_typesMaterielVM);
             _detailleMateriels = new DetailleMateriels(_materielsVM);
             _rondesVM = new RondesVM();
-            //_codesBarreVM = new CodesBarreVM(_rondesVM);
-            _detailleCodesBarre = new DetailleCodesBarre();
-            // _detailleCodesBarre = new DetailleCodesBarre(_codesBarreVM);
-            // _presencesVM = new PresencesVM(_rondesVM, _materielsVM, _meublesVM, _codesBarreVM); 
-            //
-            // _detailleRondes = new DetailleRondes(_presencesVM);
+            _codesBarreVM = new CodesBarreVM(_rondesVM);
+            _detailleCodesBarre = new DetailleCodesBarre(_codesBarreVM);
+            _presencesVM = new PresencesVM(_rondesVM, _materielsVM, _meublesVM, _codesBarreVM); 
+            _detailleRondes = new DetailleRondes(_presencesVM);
             //
             _aPropos = new Apropos();
             _aide = new Aide();
@@ -84,7 +82,7 @@ namespace GestionDuMateriel
             // rien à faire pour _aide et _aPropos _options pour le moment ... 
             // supprime les objets dans l'ordre inverse de création ... 
 
-            // _detailleRondes.ClosingParentWindow();
+            _detailleRondes.ClosingParentWindow();
             _detailleCodesBarre.ClosingParentWindow();
             _detailleMateriels.ClosingParentWindow();
             _detailleTypesMateriel.ClosingParentWindow();

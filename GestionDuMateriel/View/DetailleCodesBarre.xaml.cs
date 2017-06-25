@@ -23,21 +23,22 @@ namespace GestionDuMateriel.View
     {
 
         // constructeurs ...
-        public DetailleCodesBarre()
+        private DetailleCodesBarre()
         {
             InitializeComponent();
-            DataContext = new CodesBarreVM();
         }
-        //public DetailleCodesBarre(CodesBarreVM CodesBarreVMDependance)
-        //{
-        //    DataContext = CodesBarreVMDependance;
-        //}
+        public DetailleCodesBarre(CodesBarreVM CodesBarreVMdependance) : this()
+        {
+            DataContext = CodesBarreVMdependance;
+        }
 
         public void ClosingParentWindow()
         {
             //  (le bouton Enregistrer n'est pas visible (pas cliquable) par l'utilisateur ... 
             // appel de la commande "Enregistre" à la fermeture du formulaire ... 
+
             btnOk.Command.Execute(null);
+
         }
         
     }

@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:GestionDuMateriel.View"
         mc:Ignorable="d"
         Title="TestWindow" Height="300" Width="300">
-    <Grid>
-        <local:DetailleCodesBarre />
+    <Grid Name="uniqueGrid">
     </Grid>
 </Window>
